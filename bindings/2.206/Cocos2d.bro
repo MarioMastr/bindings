@@ -1,4 +1,14 @@
 [[link(win, android)]]
+class cocos2d::CCAnimation {
+	static cocos2d::CCAnimation *createWithSpriteFrames(CCArray *, float) = m1 0x235a88, imac 0x2927e0;
+}
+
+[[link(win, android)]]
+class cocos2d::CCAnimate {
+	static cocos2d::CCAnimate *create(cocos2d::CCAnimation*) = m1 0x342ea0, imac 0x3bf2f0;
+}
+
+[[link(win, android)]]
 class cocos2d::CCEGLViewProtocol {
     CCEGLViewProtocol() = win 0xbac00;
     virtual ~CCEGLViewProtocol() = win 0xbacc0;
@@ -1832,9 +1842,9 @@ class cocos2d::CCDictionary {
 	gd::string getFirstKey();
 
 	void setObject(cocos2d::CCObject*, gd::string const&) = ios 0x42c778, imac 0x30d960, m1 0x29f8f0;
-	//void setObject(cocos2d::CCObject*, int);
+	void setObject(CCObject*, intptr_t) = m1 0x2a0138;
 	void setObjectUnSafe(cocos2d::CCObject*, gd::string const&);
-	//void setObjectUnSafe(cocos2d::CCObject*, int);
+	void setObjectUnSafe(cocos2d::CCObject*, intptr_t) = m1 0x2a02cc;
 
 	// CCDictionary(cocos2d::CCDictionary const&);
 	// CCDictionary() = ios 0x42b75c;
@@ -1848,7 +1858,7 @@ class cocos2d::CCDictionary {
 	void removeAllObjects() = imac 0x30ceb0, m1 0x29ee04;
 	void removeObjectForElememt(cocos2d::CCDictElement*);
 	void removeObjectForKey(gd::string const&) = imac 0x30ed00, m1 0x2a0608;
-	//void removeObjectForKey(int);
+	void removeObjectForKey(intptr_t) = m1 0x2a0a78;
 	void removeObjectsForKeys(cocos2d::CCArray*);
 	cocos2d::CCString const* valueForKey(gd::string const&) = imac 0x30d3a0, m1 0x29f368, ios 0x42BAB0;
 	cocos2d::CCString const* valueForKey(intptr_t) = imac 0x30d8e0, m1 0x29f850;
@@ -2419,12 +2429,12 @@ class cocos2d::CCSpriteFrameCache {
 
 	// CCSpriteFrameCache();
 	// CCSpriteFrameCache(cocos2d::CCSpriteFrameCache const&);
-	void addSpriteFrame(cocos2d::CCSpriteFrame*, char const*);
+	void addSpriteFrame(cocos2d::CCSpriteFrame*, char const*) = m1 0x2aca14, imac 0x30e2e0;
 	void addSpriteFramesWithDictionary(cocos2d::CCDictionary*, cocos2d::CCTexture2D*) = m1 0x2ab7d8, imac 0x31acd0;
 	void addSpriteFramesWithFile(char const*, char const*);
 	void addSpriteFramesWithFile(char const*) = imac 0x31b8b0, m1 0x2ac58c, ios 0x3c5734;
 	void addSpriteFramesWithFile(char const*, cocos2d::CCTexture2D*);
-	void removeSpriteFrameByName(char const*);
+	void removeSpriteFrameByName(char const*) = m1 0x2acbec, imac 0x31bda0;
 	void removeSpriteFrames();
 	void removeSpriteFramesFromDictionary(cocos2d::CCDictionary*);
 	void removeSpriteFramesFromFile(char const*);
