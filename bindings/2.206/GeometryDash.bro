@@ -3687,7 +3687,7 @@ class EditorUI : cocos2d::CCLayer, FLAlertLayerProtocol, ColorSelectDelegate, GJ
 	TodoReturn deleteSmartBlocksFromObjects(cocos2d::CCArray*);
 	TodoReturn deleteTypeFromObjects(int, cocos2d::CCArray*);
 	void deselectAll() = win 0x10d920, imac 0x33050;
-	void deselectObject() = imac 0x33260 = win 0x10d800; 
+	void deselectObject() = imac 0x33260, win 0x10d800; 
 	void deselectObject(GameObject*) = win 0x10d800, imac 0x32fb0;
 	void deselectObjectsColor();
 	TodoReturn deselectTargetPortals() = imac 0x32c20;
