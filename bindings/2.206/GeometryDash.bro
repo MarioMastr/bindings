@@ -865,7 +865,7 @@ class ButtonSprite : cocos2d::CCSprite {
 		return create(caption, width, 0, scale, absolute, font, texture, height);
 	}
 
-	static ButtonSprite* create(char const* caption) = win 0x3e2d0, imac 0x920c0, m1 0x828f8, ios 0x65cf0 {
+	static ButtonSprite* create(char const* caption) = imac 0x920c0, m1 0x828f8, ios 0x65cf0 {
 		return ButtonSprite::create(caption, 0, false, "goldFont.fnt", "GJ_button_01.png", .0f, 1.f);
 	}
 	static ButtonSprite* create(char const* caption, const char* font, const char* texture) {
@@ -875,21 +875,21 @@ class ButtonSprite : cocos2d::CCSprite {
 		return ButtonSprite::create(caption, 0, false, font, texture, .0f, scale);
 	}
 
-	static ButtonSprite* create(char const* caption, float scale) = win 0x3e2d0, imac 0x92110, m1 0x82938 {
+	static ButtonSprite* create(char const* caption, float scale) = imac 0x92110, m1 0x82938 {
 		return ButtonSprite::create(caption, 0, false, "goldFont.fnt", "GJ_button_01.png", .0f, scale);
 	}
 	static ButtonSprite* create(char const* caption, int width, int p2, float scale, bool absolute, char const* font, char const* bg, float height) = win 0x3e2d0, imac 0x92140, m1 0x8295c, ios 0x65d30;
-	static ButtonSprite* create(char const* caption, int width, int p2, float scale, bool absolute, char const* font, char const* bg) = win 0x3e2d0, imac 0x92280, m1 0x82a88 {
+	static ButtonSprite* create(char const* caption, int width, int p2, float scale, bool absolute, char const* font, char const* bg) = imac 0x92280, m1 0x82a88 {
 		return ButtonSprite::create(caption, width, p2, scale, absolute, font, bg, .0f);
 	}
-	static ButtonSprite* create(char const* caption, int width, int p2, float scale, bool absolute) = win 0x3e2d0, imac 0x920f0, m1 0x82920 {
+	static ButtonSprite* create(char const* caption, int width, int p2, float scale, bool absolute) = imac 0x920f0, m1 0x82920 {
 		return ButtonSprite::create(caption, width, p2, scale, absolute, "goldFont.fnt", "GJ_button_01.png", .0f);
 	}
 	static ButtonSprite* create(cocos2d::CCSprite* topSprite, int width, int unused, float height, float scale, bool absolute, char const* bgSprite, bool noScaleSpriteForBG) = win 0x3dfc0, imac 0x918c0, m1 0x82188, ios 0x655fc;
-	static ButtonSprite* create(cocos2d::CCSprite* topSprite, int width, int unused, float height, float scale, bool absolute) = win 0x3e2d0, imac 0x918a0, m1 0x82178 {
+	static ButtonSprite* create(cocos2d::CCSprite* topSprite, int width, int unused, float height, float scale, bool absolute) = imac 0x918a0, m1 0x82178 {
 		return ButtonSprite::create(topSprite, width, unused, height, scale, absolute, "GJ_button_01.png", false);
 	}
-	static ButtonSprite* create(cocos2d::CCSprite* topSprite) = win 0x3e2d0, imac 0x91870, m1 0x82154 {
+	static ButtonSprite* create(cocos2d::CCSprite* topSprite) = imac 0x91870, m1 0x82154 {
 		return ButtonSprite::create(topSprite, 0, 0, .0f, 1.f, false, "GJ_button_01.png", false);
 	}
 
@@ -2202,9 +2202,9 @@ class ColorAction : cocos2d::CCObject {
 	// virtual ~ColorAction();
 
 	static ColorAction* create() = win 0x247180, imac 0x2d4e30;
-	static ColorAction* create(cocos2d::ccColor3B, bool, int) = win 0x247180; 
-	static ColorAction* create(cocos2d::ccColor3B, cocos2d::ccColor3B, float, double, bool, int, float, float) = win 0x247180; 
-	static ColorAction* create(cocos2d::ccColor3B, cocos2d::ccColor3B, float, double, bool) = win 0x247180; 
+	static ColorAction* create(cocos2d::ccColor3B, bool, int); 
+	static ColorAction* create(cocos2d::ccColor3B, cocos2d::ccColor3B, float, double, bool, int, float, float); 
+	static ColorAction* create(cocos2d::ccColor3B, cocos2d::ccColor3B, float, double, bool); 
 
 	TodoReturn getCopy();
 	bool init(cocos2d::ccColor3B, cocos2d::ccColor3B, float, double, bool, int, float, float);
@@ -2702,8 +2702,8 @@ class CreateMenuItem : CCMenuItemSpriteExtra {
 class CreateParticlePopup : FLAlertLayer, TextInputDelegate, ColorSelectDelegate, SliderDelegate {
 	// virtual ~CreateParticlePopup();
 
-	static CreateParticlePopup* create(gd::string) = win 0x400d80; 
-	static CreateParticlePopup* create(ParticleGameObject*, cocos2d::CCArray*, gd::string) = win 0x400d80; 
+	static CreateParticlePopup* create(gd::string); 
+	static CreateParticlePopup* create(ParticleGameObject*, cocos2d::CCArray*, gd::string); 
 	static CreateParticlePopup* create(ParticleGameObject*, cocos2d::CCArray*) = win 0x400d80, m1 0x3dfefc, imac 0x4787c0;
 
 	TodoReturn centerAlignParticle(cocos2d::CCObject*);
@@ -3883,7 +3883,7 @@ class EditorUI : cocos2d::CCLayer, FLAlertLayerProtocol, ColorSelectDelegate, GJ
 	TodoReturn closeLiveColorSelect();
 	TodoReturn closeLiveHSVSelect();
 	void colorSelectClosed(cocos2d::ccColor3B) = win 0x11b860, m1 0x44150; 
-	void constrainGameLayerPosition() = win 0x11e960, m1 0x2bc50; 
+	void constrainGameLayerPosition() = win 0x11e960; 
 	void constrainGameLayerPosition(float, float) = win 0x11e960, imac 0x2ae30, m1 0x2bc50;
 	TodoReturn convertKeyBasedOnNeighbors(int, int, cocos2d::CCPoint, cocos2d::CCArray*);
 	TodoReturn convertToBaseKey(int);
@@ -10790,7 +10790,7 @@ class GJUserMessage : cocos2d::CCNode {
 	// virtual ~GJUserMessage();
 
 	static GJUserMessage* create() = win 0x16b5f0, m1 0x4b57ac, imac 0x567830;
-	static GJUserMessage* create(cocos2d::CCDictionary*) = win 0x16b5f0, m1 0x4b57ac; 
+	static GJUserMessage* create(cocos2d::CCDictionary*); 
 
 	virtual bool init() = imac 0x5678d0;
 
