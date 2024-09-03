@@ -2383,7 +2383,7 @@ class ColorSelectPopup : SetupTriggerPopup, cocos2d::extension::ColorPickerDeleg
 	static ColorSelectPopup* create(ColorAction* action) = win inline, m1 0x644504, imac 0x7323d0 {
 		return ColorSelectPopup::create(nullptr, nullptr, action);
 	}
-	static ColorSelectPopup* create(EffectGameObject* effect, cocos2d::CCArray* array, ColorAction* action) = win 0x8c220, m1 0x64430c, imac 0x7320f0;
+	static ColorSelectPopup* create(EffectGameObject* effect, cocos2d::CCArray* array, ColorAction* action) = win 0x8c220, imac 0x7320f0;
 	static ColorSelectPopup* create(EffectGameObject* effect, cocos2d::CCArray* array) = win inline, m1 0x64430c, imac 0x7320e0 {
 		return ColorSelectPopup::create(effect, array, nullptr);
 	}
@@ -8707,7 +8707,7 @@ class GJEffectManager : cocos2d::CCNode {
 	TodoReturn controlActionsForTrigger(EffectGameObject*, GJActionCommand);
 	int countForItem(int);
 	TodoReturn createFollowCommand(float, float, float, int, int, int, int);
-	TodoReturn createKeyframeCommand(int, cocos2d::CCArray*, GameObject*, int, int, bool, float, float, float, float, float, float, gd::vector<int> const&);
+	TodoReturn createKeyframeCommand(int, cocos2d::CCArray*, GameObject*, int, int, bool, float, float, float, float, float, float, gd::vector<int> const&) = m1 0x278bb0;
 	TodoReturn createMoveCommand(cocos2d::CCPoint, int, float, int, float, bool, bool, bool, bool, float, float, int, int);
 	TodoReturn createPlayerFollowCommand(float, float, int, float, float, int, int, int);
 	TodoReturn createRotateCommand(float, float, int, int, int, float, bool, bool, bool, int, int);
@@ -14611,7 +14611,7 @@ class PlayLayer : GJBaseGameLayer, CCCircleWaveDelegate, CurrencyRewardDelegate,
 	TodoReturn colorObject(int, cocos2d::ccColor3B);
 	TodoReturn commitJumps();
 	TodoReturn compareStateSnapshot();
-	CheckpointObject* createCheckpoint() = win 0x391b00;
+	CheckpointObject* createCheckpoint() = win 0x391b00, m1 0xa8020;
 	void createObjectsFromSetupFinished() = win 0x38a4f0, imac 0xb7740, m1 0xa400c;
 	void delayedFullReset();
 	void delayedResetLevel() = win 0x395700, imac 0xbb940, m1 0xa79c8;
