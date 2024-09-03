@@ -1416,6 +1416,12 @@ class cocos2d::CCEGLView {
 	void onGLFWWindowSizeFunCallback(GLFWwindow* window, int width, int height);
 	[[missing(android, mac, ios)]]
 	void onGLFWframebuffersize(GLFWwindow* window, int width, int height);
+	// [[missing(android, mac, ios)]]
+    // static cocos2d::CCEGLView* createWithFullScreen(gd::string const&, bool);
+	// [[missing(android, mac, ios)]]
+	// static cocos2d::CCEGLView* createWithFullScreen(gd::string const&, bool, GLFWvidmode const&, GLFWmonitor*);
+	// [[missing(android, mac, ios)]]
+	// static cocos2d::CCEGLView* createWithRect(gd::string const&, cocos2d::CCRect, float);
 	// sharedOpenGLView() = ios 0x130f38, imac 0x50df50
 }
 
@@ -1920,7 +1926,7 @@ class cocos2d::CCDictionary {
 	gd::string getFirstKey();
 
 	void setObject(cocos2d::CCObject*, gd::string const&) = ios 0x42c778, imac 0x30d960, m1 0x29f8f0;
-	void setObject(CCObject*, intptr_t) = m1 0x2a0138, imac 0x30d960;
+	void setObject(cocos2d::CCObject*, intptr_t) = imac 0x30e2e0, m1 0x2a0138;
 	void setObjectUnSafe(cocos2d::CCObject*, gd::string const&);
 	void setObjectUnSafe(cocos2d::CCObject*, intptr_t) = m1 0x2a02cc;
 
@@ -1935,8 +1941,8 @@ class cocos2d::CCDictionary {
 	cocos2d::CCObject* randomObject();
 	void removeAllObjects() = imac 0x30ceb0, m1 0x29ee04;
 	void removeObjectForElememt(cocos2d::CCDictElement*) = imac 0x30ebb0;
-	void removeObjectForKey(gd::string const&) = imac 0x30ed00, m1 0x2a0608;
-	void removeObjectForKey(intptr_t) = m1 0x2a0a78;
+	void removeObjectForKey(gd::string const&) = imac 0x30e7f0, m1 0x2a0608;
+	void removeObjectForKey(intptr_t) = imac 0x30ed00, m1 0x2a0a78;
 	void removeObjectsForKeys(cocos2d::CCArray*);
 	cocos2d::CCString const* valueForKey(gd::string const&) = imac 0x30d3a0, m1 0x29f368, ios 0x42BAB0;
 	cocos2d::CCString const* valueForKey(intptr_t) = imac 0x30d8e0, m1 0x29f850;
@@ -1994,7 +2000,7 @@ class cocos2d::CCRenderTexture {
 
 [[link(win, android)]]
 class cocos2d::CCRepeat {
-	static cocos2d::CCRepeat* create(cocos2d::CCFiniteTimeAction*, unsigned int) = m1 0x33daf8, imac 0x3b9530;
+	static cocos2d::CCRepeat* create(cocos2d::CCFiniteTimeAction*, unsigned int) = m1 0x33daf0, imac 0x3b9530;
 
 	bool initWithAction(cocos2d::CCFiniteTimeAction*, unsigned int);
 
