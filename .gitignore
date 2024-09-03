@@ -7,3 +7,4 @@ __optcall.xml
 __membercall.xml
 /.vs
 build_test.sh
+build_test_win.sh
