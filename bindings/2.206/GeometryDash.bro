@@ -2127,9 +2127,9 @@ class CheckpointGameObject : EffectGameObject {
 [[link(android), depends(GJGameState), depends(GJShaderState), depends(FMODAudioState), depends(EffectManagerState)]]
 class CheckpointObject : cocos2d::CCNode {
 	// virtual ~CheckpointObject();
-	CheckpointObject() = win 0x381f50;
+	CheckpointObject() = win 0x381f50, m1 0xb58e0;
 
-	static CheckpointObject* create() = win inline, m1 0xb58e0 {
+	static CheckpointObject* create() = win inline, m1 inline {
 		auto ret = new CheckpointObject();
 		if (ret->init()) {
 			ret->autorelease();
@@ -2153,7 +2153,7 @@ class CheckpointObject : cocos2d::CCNode {
 	void* m_maybeAPointer1;
 	int m_unkInt1;
 	short m_unkShort1;
-	PAD = win 0x2;
+	PAD = win 0x2, m1 0x2;
 	void* m_maybeAPointer2;
 	gd::vector<DynamicSaveObject> m_vectorDynamicSaveObjects;
 	gd::vector<ActiveSaveObject1> m_vectorActiveSaveObjects1;
@@ -2161,7 +2161,7 @@ class CheckpointObject : cocos2d::CCNode {
 	EffectManagerState m_effectManagerState;
 	cocos2d::CCArray* m_gradientTriggerObjectArray;
 	bool m_unkBool1;
-	PAD = win 0x7;
+	PAD = win 0x7, m1 0x7;
 	gd::unordered_map<int,SequenceTriggerState> m_sequenceTriggerStateUnorderedMap;
 	void* m_maybeAPointer3;
 }
@@ -5805,7 +5805,7 @@ class GameLevelOptionsLayer : GJOptionsLayer{
 [[link(android), depends(UIButtonConfig)]]
 class GameManager : GManager {
 	virtual ~GameManager() = win 0x172770, imac 0x38ddc0, m1 0x316d38;
-	// GameManager() = win 0x1721e0, ios 0x32eafc;
+	GameManager() = win 0x1721e0, ios 0x32eafc;
 
 	static GameManager* get() {
 		return GameManager::sharedState();
