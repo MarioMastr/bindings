@@ -1563,7 +1563,7 @@ class cocos2d::CCDirector {
 	void setContentScaleFactor(float);
 	void setDefaultValues();
 	void setDelegate(cocos2d::CCDirectorDelegate*);
-	void setDeltaTime(float) = m1 0x3f3260;
+	void setDeltaTime(float);
 	void setDepthTest(bool) = ios 0x1811b4, imac 0x48ba80;
 	void setDisplayStats(bool);
 	void setDontCallWillSwitch(bool);
