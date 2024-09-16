@@ -386,7 +386,7 @@ class cocos2d::CCScene {
 
 [[link(win, android)]]
 class cocos2d::CCSet {
-	static cocos2d::CCSet* create();
+	static cocos2d::CCSet* create() = m1 0x6c59d4, imac 0x7bfc00;
 
 	//CCSet(cocos2d::CCSet const&) = imac 0x7bf970, m1 0x6c576c;
 	CCSet() = imac 0x7bf920, m1 0x6c570c;
@@ -1520,6 +1520,18 @@ class cocos2d::CCKeyboardDispatcher {
 	char const* keyToString(cocos2d::enumKeyCodes) = m1 0x1b06d8, imac 0x1fdeb0;
 	void removeDelegate(cocos2d::CCKeyboardDelegate*) = m1 0x1b0228;
 	void updateModifierKeys(bool, bool, bool, bool) = m1 0x1b06c0, imac 0x1fde80;
+}
+
+[[link(win, android)]]
+class cocos2d::CCKeypadDispatcher {
+	// CCKeypadDispatcher(cocos2d::CCKeypadDispatcher const&);
+	// CCKeypadDispatcher();
+
+	void addDelegate(cocos2d::CCKeypadDelegate*);
+	bool dispatchKeypadMSG(cocos2d::ccKeypadMSGType);
+	void forceAddDelegate(cocos2d::CCKeypadDelegate*);
+	void forceRemoveDelegate(cocos2d::CCKeypadDelegate*);
+	void removeDelegate(cocos2d::CCKeypadDelegate*);
 }
 
 [[link(win, android)]]
@@ -2733,24 +2745,24 @@ class cocos2d::CCTextFieldTTF {
 
 	void setDelegate(cocos2d::CCTextFieldDelegate* var);
 
-	virtual void draw();
-	virtual const cocos2d::ccColor3B& getColorSpaceHolder();
-	virtual void setColorSpaceHolder(const cocos2d::ccColor3B& color);
-	virtual const char* getPlaceHolder();
-	virtual void setPlaceHolder(const char* text);
-	virtual void setSecureTextEntry(bool value);
-	virtual bool isSecureTextEntry();
+	virtual void draw() = m1 0x21e620;
+	virtual const cocos2d::ccColor3B& getColorSpaceHolder() = m1 0x21e6e0;
+	virtual void setColorSpaceHolder(const cocos2d::ccColor3B& color) = m1 0x21e6e8;
+	virtual const char* getPlaceHolder() = m1 0x21eae8;
+	virtual void setPlaceHolder(const char* text) = m1 0x21e9a0;
+	virtual void setSecureTextEntry(bool value) = m1 0x21eb00;
+	virtual bool isSecureTextEntry() = m1 0x21eb54;
 
 	virtual void setString(const char* text) = m1 0x21e6fc;
 	virtual const char* getString() = m1 0x21e970;
 
-	virtual bool attachWithIME();
-	virtual bool detachWithIME();
-	virtual bool canAttachWithIME();
-	virtual bool canDetachWithIME();
-	virtual void insertText(const char* text, int len, cocos2d::enumKeyCodes keyCode);
-	virtual void deleteBackward();
-	virtual const char* getContentText();
+	virtual bool attachWithIME() = m1 0x21dd40;
+	virtual bool detachWithIME() = m1 0x21ddcc;
+	virtual bool canAttachWithIME() = m1 0x21de58;
+	virtual bool canDetachWithIME() = m1 0x21decc;
+	virtual void insertText(const char* text, int len, cocos2d::enumKeyCodes keyCode) = m1 0x21df40;
+	virtual void deleteBackward() = m1 0x21e2f8;
+	virtual const char* getContentText() = m1 0x21e5f0;
 }
 
 [[link(win, android)]]
