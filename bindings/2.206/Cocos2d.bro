@@ -2734,11 +2734,11 @@ class cocos2d::CCDelayTime {
 
 [[link(win, android)]]
 class cocos2d::CCTextFieldTTF {
-	// CCTextFieldTTF();
+	CCTextFieldTTF() = m1 0x21d7b0;
 	// virtual ~CCTextFieldTTF();
 
 	static CCTextFieldTTF* textFieldWithPlaceHolder(const char* placeholder, const cocos2d::CCSize& dimensions, cocos2d::CCTextAlignment alignment, const char* fontName, float fontSize);
-	static CCTextFieldTTF* textFieldWithPlaceHolder(const char* placeholder, const char* fontName, float fontSize);
+	static CCTextFieldTTF* textFieldWithPlaceHolder(const char* placeholder, const char* fontName, float fontSize) = m1 0x21db5c;
 
 	bool initWithPlaceHolder(const char* placeholder, const cocos2d::CCSize& dimensions, cocos2d::CCTextAlignment alignment, const char* fontName, float fontSize);
 	bool initWithPlaceHolder(const char* placeholder, const char* fontName, float fontSize);
