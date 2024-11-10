@@ -8110,8 +8110,8 @@ class GJBaseGameLayer : cocos2d::CCLayer, TriggerEffectDelegate {
 	virtual TodoReturn applyTimeWarp(float) = win 0x226160, m1 0x118ae0, imac 0x144820, ios 0x207d90;
 	virtual TodoReturn playGravityEffect(bool) = m1 0xdf6e8, imac 0xfda10, ios 0x214110;
 	virtual TodoReturn manualUpdateObjectColors(GameObject*) = ios 0x214114;
-	virtual TodoReturn createCustomParticle(gd::string const&, cocos2d::ParticleStruct const&, int, bool) = win 0x22fe90, m1 0x1234a8, imac 0x152660, ios 0x20f7d4;
-	virtual TodoReturn claimCustomParticle(gd::string const&, cocos2d::ParticleStruct const&, int, int, int, bool) = win 0x230190, m1 0x123828, imac 0x1529b0, ios 0x20fa04;
+	virtual cocos2d::CCParticleSystem *createCustomParticle(gd::string const&, cocos2d::ParticleStruct const&, int, bool) = win 0x22fe90, m1 0x1234a8, imac 0x152660, ios 0x20f7d4;
+	virtual cocos2d::CCParticleSystem *claimCustomParticle(gd::string const&, cocos2d::ParticleStruct const&, int, int, int, bool) = win 0x230190, m1 0x123828, imac 0x1529b0, ios 0x20fa04;
 	virtual TodoReturn unclaimCustomParticle(gd::string const&, cocos2d::CCParticleSystemQuad*) = win 0x230390, m1 0x123a68, imac 0x152bb0, ios 0x20fc44;
 	virtual TodoReturn activatedAudioTrigger(SFXTriggerGameObject*) = win 0x231f30, m1 0x1247e0, imac 0x153b30, ios 0x210750;
 	virtual void checkpointActivated(CheckpointGameObject*) = win 0x235b70, m1 0x127a8c, imac 0x157ed0, ios 0x212a7c;
@@ -12054,7 +12054,7 @@ class LevelEditorLayer : GJBaseGameLayer, LevelSettingsDelegate {
 	virtual void resetSPTriggered() = m1 0xd6640, imac 0xf2f00, ios 0x37042c;
 	virtual TodoReturn didRotateGameplay() = m1 0xd798c, win 0x2cbba0, imac 0xf4640, ios 0x37105c;
 	virtual TodoReturn manualUpdateObjectColors(GameObject*) = m1 0xd32c0, win 0x2c6380, imac 0xef0d0, ios 0x36d9fc;
-	virtual TodoReturn claimCustomParticle(gd::string const&, cocos2d::ParticleStruct const&, int, int, int, bool) = win 0x2cdcc0, m1 0xd9e84, imac 0xf6ee0, ios 0x372bdc;
+	virtual cocos2d::CCParticleSystem *claimCustomParticle(gd::string const&, cocos2d::ParticleStruct const&, int, int, int, bool) = win 0x2cdcc0, m1 0xd9e84, imac 0xf6ee0, ios 0x372bdc;
 	virtual TodoReturn unclaimCustomParticle(gd::string const&, cocos2d::CCParticleSystemQuad*) = win 0x2cdd80, m1 0xd9f60, imac 0xf6fa0, ios 0x372ca8;
 	virtual TodoReturn activatedAudioTrigger(SFXTriggerGameObject*) = m1 0xd8e4c, imac 0xf5e20, ios 0x371f88; // win inline
 	virtual void checkpointActivated(CheckpointGameObject*) = win 0x2cd450, m1 0xd8e64, imac 0xf5e50, ios 0x371fa0;
