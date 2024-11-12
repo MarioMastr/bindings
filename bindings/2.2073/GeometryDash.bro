@@ -20328,11 +20328,11 @@ class VideoOptionsLayer : FLAlertLayer {
 
     CCMenuItemToggler* createToggleButton(gd::string, cocos2d::SEL_MenuHandler, bool, cocos2d::CCMenu*, cocos2d::CCPoint, float, float, bool, cocos2d::CCArray*) = m1 0x69dfdc;
     void onAdvanced(cocos2d::CCObject* sender);
-    void onApply(cocos2d::CCObject* sender) = imac 0x78a6d0, m1 0x69e470;
+    void onApply(cocos2d::CCObject* sender) = imac 0x78a6d0, m1 0x69e470, win 0x362ac0;
     void onClose(cocos2d::CCObject* sender) = m1 0x69e418;
     void onFullscreen(cocos2d::CCObject* sender) = m1 0x69e238;
     void onBorderless(cocos2d::CCObject* sender) = m1 0x69e248;
-    void onBorderlessFix(cocos2d::CCObject* sender) = m1 0x69e258;
+    void onBorderlessFix(cocos2d::CCObject* sender) = m1 0x69e258, win 0x362180;
     void onInfo(cocos2d::CCObject* sender);
     void onResolutionNext(cocos2d::CCObject* sender);
     void onResolutionPrev(cocos2d::CCObject* sender);
@@ -20343,7 +20343,7 @@ class VideoOptionsLayer : FLAlertLayer {
     void updateResolution(int);
     void updateTextureQuality(int);
 
-    virtual bool init() = imac 0x789280, m1 0x69d144;
+    virtual bool init() = imac 0x789280, m1 0x69d144, win 0x360cd0;
     virtual void keyBackClicked() = win 0x362b40, imac 0x78af30, m1 0x69ec48;
 
     CCMenuItemSpriteExtra* m_prevResolutionBtn;
