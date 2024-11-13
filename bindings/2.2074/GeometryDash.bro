@@ -4043,7 +4043,7 @@ class EditorUI : cocos2d::CCLayer, FLAlertLayerProtocol, ColorSelectDelegate, GJ
     TodoReturn getTouchPoint(cocos2d::CCTouch*, cocos2d::CCEvent*);
     TodoReturn getTransformState();
     TodoReturn getXMin(int) = imac 0x2f470;
-    bool init(LevelEditorLayer* editorLayer) = win 0xdde60, m1 0xad4c;
+    bool init(LevelEditorLayer* editorLayer) = win 0xdde60, m1 0xad4c, imac 0x9710;
     bool isLiveColorSelectTrigger(GameObject*);
     bool isSpecialSnapObject(int) = win 0x1272b0, imac 0x4c2f0;
     TodoReturn liveEditColorUsable();
@@ -4191,7 +4191,7 @@ class EditorUI : cocos2d::CCLayer, FLAlertLayerProtocol, ColorSelectDelegate, GJ
     TodoReturn updateGridNodeSize(int);
     TodoReturn updateGroupIDBtn2();
     void updateGroupIDLabel() = imac 0x2ccd0;
-    void updateObjectInfoLabel() = win 0xe17c0, m1 0x2f208;
+    void updateObjectInfoLabel() = win 0xe17c0, m1 0x2f208, imac 0x2f870;
     TodoReturn updatePlaybackBtn() = imac 0x2d5f0;
     TodoReturn updateSlider() = win 0xe14a0;
     TodoReturn updateSpecialUIElements();
@@ -5049,7 +5049,7 @@ class FMODAudioEngine : cocos2d::CCNode {
     }
 
     static FMODAudioEngine* sharedEngine() = win inline, imac 0x3c9e70, m1 0x352964 {
-        auto** instancePtr = reinterpret_cast<FMODAudioEngine**>(geode::base::get() + 0x6a4e10);
+        auto** instancePtr = reinterpret_cast<FMODAudioEngine**>(geode::base::get() + 0x6a4e18);
         if (!*instancePtr) {
             *instancePtr = new FMODAudioEngine();
             (*instancePtr)->init();
@@ -13428,7 +13428,7 @@ class MenuLayer : cocos2d::CCLayer, FLAlertLayerProtocol, GooglePlayDelegate {
     void onGameCenter(cocos2d::CCObject* sender);
     void onGarage(cocos2d::CCObject* sender) = win 0x320f00;
     void onGooglePlayGames(cocos2d::CCObject* sender) = m1 0x30f23c;
-    void onMoreGames(cocos2d::CCObject* sender) = win 0x320880, imac 0x37e5c0;
+    void onMoreGames(cocos2d::CCObject* sender) = win 0x320880, imac 0x37e5c0, m1 0x30ed3c;
     void onMyProfile(cocos2d::CCObject* sender) = win 0x320720, m1 0x30ee98;
     void onNewgrounds(cocos2d::CCObject* sender);
     void onOptions(cocos2d::CCObject* sender) = win 0x320bb0;
@@ -14153,15 +14153,23 @@ class NumberInputLayer : FLAlertLayer {
 class OBB2D : cocos2d::CCNode {
     // virtual ~OBB2D();
 
-    static OBB2D* create(cocos2d::CCPoint, float, float, float) = win 0x6d880;
+    static OBB2D* create(cocos2d::CCPoint center, float width,float height,float rotationAngle) = win 0x6d880;
 
-    void calculateWithCenter(cocos2d::CCPoint, float, float, float) = win 0x6da50, imac 0x5dbe20, m1 0x50edb8;
-    TodoReturn computeAxes();
-    TodoReturn getBoundingRect();
-    bool init(cocos2d::CCPoint, float, float, float);
-    TodoReturn orderCorners() = win 0x6dd70;
-    TodoReturn overlaps(OBB2D*);
-    TodoReturn overlaps1Way(OBB2D*) = win 0x6e100;
+    void calculateWithCenter(cocos2d::CCPoint center, float width,float height,float rotationAngle) = win 0x6da50, imac 0x5dbe20, m1 0x50edb8;
+    void computeAxes();
+    cocos2d::CCRect getBoundingRect();
+    bool init(cocos2d::CCPoint center, float width,float height,float rotationAngle);
+    void orderCorners() = win 0x6dd70;
+    bool overlaps(OBB2D*);
+    bool overlaps1Way(OBB2D*) = win 0x6e100;
+
+
+    std::array<cocos2d::CCPoint, 4> m_corners;
+    std::array<cocos2d::CCPoint, 4> m_positions;
+    cocos2d::CCPoint m_horizontalDifference;
+    cocos2d::CCPoint m_verticalDifference;
+    std::array<cocos2d::CCPoint, 4> m_axes;
+    cocos2d::CCPoint m_center;
 }
 
 [[link(android)]]
@@ -19471,12 +19479,61 @@ class SpriteAnimationManager : cocos2d::CCNode {
 [[link(android)]]
 class SpriteDescription : cocos2d::CCObject {
     // virtual ~SpriteDescription();
-    // SpriteDescription();
+    SpriteDescription() {
+        m_position = cocos2d::CCPointMake(0.f, 0.f);
+        m_scale = cocos2d::CCPointMake(0.f, 0.f);
+        m_flipped = cocos2d::CCPointMake(0.f, 0.f);
+        m_rotation = 0;
+        m_zValue = 0;
+        m_tag = 0;
+        m_usesCustomTag = false;
+        m_texture = nullptr;
+    }
 
-    TodoReturn createDescription(cocos2d::CCDictionary*);
-    TodoReturn createDescription(DS_Dictionary*);
-    TodoReturn initDescription(cocos2d::CCDictionary*);
-    TodoReturn initDescription(DS_Dictionary*);
+    static SpriteDescription* createDescription(cocos2d::CCDictionary* dict) = win inline, m1 0x4ac3e8, imac 0x555800 {
+        auto ret = new SpriteDescription();
+        if (ret->initDescription(dict)) {
+            ret->autorelease();
+            return ret;
+        }
+        delete ret;
+        return nullptr;
+    }
+    static SpriteDescription* createDescription(DS_Dictionary* dict) = win inline, m1 0x4acb54, imac 0x555f80 {
+        auto ret = new SpriteDescription();
+        if (ret->initDescription(dict)) {
+            ret->autorelease();
+            return ret;
+        }
+        delete ret;
+        return nullptr;
+    }
+    bool initDescription(cocos2d::CCDictionary* dict) = win inline, m1 0x4acfc4, imac 0x5563d0 {
+        m_position = cocos2d::CCPointFromString(dict->valueForKey("position")->getCString());
+        m_scale = cocos2d::CCPointFromString(dict->valueForKey("scale")->getCString());
+        m_flipped = cocos2d::CCPointFromString(dict->valueForKey("flipped")->getCString());
+        m_rotation = dict->valueForKey("rotation")->floatValue();
+        m_zValue = dict->valueForKey("zValue")->intValue();
+        m_tag = dict->valueForKey("tag")->intValue();
+        m_usesCustomTag = dict->valueForKey("usesCustomTag")->boolValue();
+        if (m_usesCustomTag) {
+            auto frameName = dict->valueForKey("texture")->getCString();
+            m_texture = cocos2d::CCSpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(frameName);
+            m_texture->retain();
+            m_texture->setFrameName(frameName);
+        }
+        return true;
+    }
+    bool initDescription(DS_Dictionary* dict) = win 0x41cf0, m1 0x4acd18, imac 0x556150;
+
+    cocos2d::CCPoint m_position;
+    cocos2d::CCPoint m_scale;
+    cocos2d::CCPoint m_flipped;
+    float m_rotation;
+    int m_zValue;
+    int m_tag;
+    bool m_usesCustomTag;
+    cocos2d::CCSpriteFrame* m_texture;
 }
 
 [[link(android)]]
