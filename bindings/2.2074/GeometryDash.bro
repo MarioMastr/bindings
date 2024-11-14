@@ -16236,7 +16236,7 @@ class SecretRewardsLayer : cocos2d::CCLayer, DialogDelegate, BoomScrollLayerDele
         if (m_inMainLayer) m_mainScrollLayer->moveToPage(page);
         else m_secondaryScrollLayer->moveToPage(page);
     }
-    bool init(bool) = win 0x3bb300;
+    bool init(bool) = win 0x3bb300, imac 0x61d6f0;
     void moveToMainLayer(cocos2d::CCObject*) = m1 0x548784;
     void moveToSecondaryLayer(int) = m1 0x548300;
     void onBack(cocos2d::CCObject* sender) = win 0x3c08b0;
@@ -20155,7 +20155,7 @@ class UILayer : cocos2d::CCLayerColor {
     void enableEditorMode();
     TodoReturn enableMenu();
     void handleKeypress(cocos2d::enumKeyCodes, bool) = win 0x4b4c40, imac 0x4b5d70, m1 0x41de7c;
-    bool init(GJBaseGameLayer*) = win 0x4b3f20, m1 0x41cbc4;
+    bool init(GJBaseGameLayer*) = win 0x4b3f20, m1 0x41cbc4, imac 0x4b89b0;
     bool isJumpButtonPressed(bool) = imac 0x4b6720, m1 0x41e598;
     void onCheck(cocos2d::CCObject* sender);
     void onDeleteCheck(cocos2d::CCObject* sender);
@@ -20461,9 +20461,9 @@ class VideoOptionsLayer : FLAlertLayer {
 
     CCMenuItemToggler* createToggleButton(gd::string, cocos2d::SEL_MenuHandler, bool, cocos2d::CCMenu*, cocos2d::CCPoint, float, float, bool, cocos2d::CCArray*);
     void onAdvanced(cocos2d::CCObject* sender);
-    void onApply(cocos2d::CCObject* sender) = imac 0x78a590, win 0x362720;
+    void onApply(cocos2d::CCObject* sender) = imac 0x78a590, win 0x362720, m1 0x69e330;
     void onBorderless(cocos2d::CCObject* sender);
-    void onBorderlessFix(cocos2d::CCObject* sender) = win 0x3622a0;
+    void onBorderlessFix(cocos2d::CCObject* sender) = win 0x3622a0, m1 0x69e118, imac 0x78a340;
     void onClose(cocos2d::CCObject* sender) = win 0x362be0;
     void onFullscreen(cocos2d::CCObject* sender);
     void onInfo(cocos2d::CCObject* sender);
