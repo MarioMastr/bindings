@@ -1293,7 +1293,7 @@ class cocos2d::CCTextureCache {
     char const* description() = imac 0x5d4910, m1 0x5083f4;
     void dumpCachedTextureInfo();
     void prepareAsyncLoading() = imac 0x5d4ac0, m1 0x508584;
-    bool reloadTexture(char const*);
+    bool reloadTexture(char const*) = m1 0x50a4bc;
     void removeAllTextures();
     void removeTexture(cocos2d::CCTexture2D*);
     void removeTextureForKey(char const*) = imac 0x5d6ca0;
