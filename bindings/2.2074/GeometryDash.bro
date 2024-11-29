@@ -1343,7 +1343,7 @@ class CCMenuItemToggler : cocos2d::CCMenuItem {
     CCMenuItemToggler() {}
     // virtual ~CCMenuItemToggler();
 
-    static CCMenuItemToggler* create(cocos2d::CCNode*, cocos2d::CCNode*, cocos2d::CCObject*, cocos2d::SEL_MenuHandler) = win 0x451e0, imac 0x59c70, m1 0x4f880;
+    static CCMenuItemToggler* create(cocos2d::CCNode*, cocos2d::CCNode*, cocos2d::CCObject*, cocos2d::SEL_MenuHandler) = win 0x451e0, imac 0x59c70, m1 0x4f880, ios 0x19452c;
     static CCMenuItemToggler* createWithSize(const char* spr1, const char* spr2, cocos2d::CCObject* target, cocos2d::SEL_MenuHandler callback, float scale) {
         auto sprOff = cocos2d::CCSprite::createWithSpriteFrameName(spr1);
         auto sprOn = cocos2d::CCSprite::createWithSpriteFrameName(spr2);
@@ -1385,7 +1385,7 @@ class CCMenuItemToggler : cocos2d::CCMenuItem {
     virtual void setEnabled(bool) = win 0x45530, m1 0x50044, imac 0x5a390, ios 0x1949cc;
 
     TodoReturn activeItem();
-    bool init(cocos2d::CCNode* off, cocos2d::CCNode* on, cocos2d::CCObject* target, cocos2d::SEL_MenuHandler callback) = win inline, imac 0x59d40, m1 0x4f964 {
+    bool init(cocos2d::CCNode* off, cocos2d::CCNode* on, cocos2d::CCObject* target, cocos2d::SEL_MenuHandler callback) = win inline, imac 0x59d40, m1 0x4f964, ios 0x1945fc {
         if (!CCMenuItem::initWithTarget(target, callback)) return false;
 
         m_offButton = CCMenuItemSpriteExtra::create(off, nullptr, this, menu_selector(CCMenuItemToggler::normalTouch));
