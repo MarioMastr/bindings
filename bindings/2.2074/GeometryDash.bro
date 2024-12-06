@@ -19470,10 +19470,10 @@ class SongSelectNode : cocos2d::CCNode, FLAlertLayerProtocol, CustomSongLayerDel
     void audioNext(cocos2d::CCObject* sender) = win 0xc6ab0, imac 0x2079d0, m1 0x1bc9d4;
     void audioPrevious(cocos2d::CCObject* sender) = win 0xc6af0, imac 0x207990, m1 0x1bc9a0;
     bool init(int, bool, LevelSettingsObject*, SongSelectType, cocos2d::CCPoint, cocos2d::CCNode*, cocos2d::CCMenu*, bool) = win 0xc60b0, imac 0x207080, m1 0x1bc070;
-    void onOpenCustomSong(cocos2d::CCObject* sender);
-    void onSongMode(cocos2d::CCObject* sender) = imac 0x207a10;
+    void onOpenCustomSong(cocos2d::CCObject* sender) = m1 0x1cba40, win 0xc6e00, imac 0x207a40;
+    void onSongMode(cocos2d::CCObject* sender) = imac 0x207a10, m1 0x1bca0c, win 0xc6b20;
     void onSongMode(int) = win 0xc6b50, imac 0x207ae0, m1 0x1bcabc;
-    void selectSong(int id) = win inline, imac 0x207ab0 {
+    void selectSong(int id) = win inline, imac 0x207ab0, m1 inline {
         auto songID = id;
         if (songID > 21) songID = 21;
         m_songChanged = true;
