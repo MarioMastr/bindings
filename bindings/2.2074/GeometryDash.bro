@@ -3497,7 +3497,7 @@ class DailyLevelPage : FLAlertLayer, FLAlertLayerProtocol, GJDailyLevelDelegate,
 class DashRingObject : RingObject {
     // virtual ~DashRingObject();
 
-    static DashRingObject* create(char const*);
+    static DashRingObject* create(char const*) = m1 0x166734;
 
     virtual void customObjectSetup(gd::vector<gd::string>&, gd::vector<void*>&) = imac 0x1a4340, m1 0x166864, ios 0x37bacc;
     virtual gd::string getSaveString(GJBaseGameLayer*) = imac 0x1a44b0, m1 0x1669bc, ios 0x37bc10;
@@ -7822,7 +7822,7 @@ class GJBaseGameLayer : cocos2d::CCLayer, TriggerEffectDelegate {
     virtual void updateVisibility(float) = m1 0x8fb0, imac 0x7150, ios 0xd590;
     virtual void playerTookDamage(PlayerObject*) = m1 0x8fb0, imac 0x7150, ios 0xd590;
     virtual TodoReturn opacityForObject(GameObject*) = win 0x231ce0, imac 0x141d40, m1 0x118f10, ios 0x200918;
-    virtual TodoReturn addToSpeedObjects(EffectGameObject*) = m1 0x8fb0, imac 0x7150, ios 0xd590;
+    virtual void addToSpeedObjects(EffectGameObject*) = m1 0x8fb0, imac 0x7150, ios 0xd590;
     virtual void objectsCollided(int, int) = win 0x213c90, imac 0x11b120, m1 0xf9cf8, ios 0x1ecfb0;
     virtual void updateColor(cocos2d::ccColor3B& color, float fadeTime, int colorID, bool blending, float opacity, cocos2d::ccHSVValue& copyHSV, int colorIDToCopy, bool copyOpacity, EffectGameObject* callerObject, int unk1, int unk2) = win 0x21e5c0, imac 0x12c570, m1 0x1076d8, ios 0x1f3a00;
     virtual void toggleGroupTriggered(int, bool, gd::vector<int> const&, int, int) = win 0x21e7a0, imac 0x12c710, m1 0x107844, ios 0x1f3b6c;
@@ -8049,7 +8049,7 @@ class GJBaseGameLayer : cocos2d::CCLayer, TriggerEffectDelegate {
     void playExitDualEffect(PlayerObject*) = win 0x2119a0;
     TodoReturn playFlashEffect(float, int, float);
     TodoReturn playKeyframeAnimation(KeyframeAnimTriggerObject*, gd::vector<int> const&);
-    TodoReturn playSpeedParticle(float) = m1 0x121058, imac 0x14c000;
+    void playSpeedParticle(float) = m1 0x121058, imac 0x14c000;
     TodoReturn positionForShaderTarget(int) = win 0x21e1a0;
     TodoReturn positionUIObjects();
     TodoReturn prepareSavePositionObjects();
@@ -8307,7 +8307,7 @@ class GJBaseGameLayer : cocos2d::CCLayer, TriggerEffectDelegate {
     TodoReturn updateSpecialLabels() = win 0x2338f0;
     void updateStaticCameraPos(cocos2d::CCPoint pos, bool staticX, bool staticY, bool followOrSmoothEase, float time, int easingType, float easingRate) = win 0x238ca0, imac 0x114990, m1 0xf40c8;
     TodoReturn updateStaticCameraPosToGroup(int, bool, bool, bool, float, float, int, float, bool, float) = win 0x2388b0;
-    TodoReturn updateTimeMod(float, bool, bool);
+    void updateTimeMod(float, bool, bool) = m1 0xf3800;
     TodoReturn updateTimerLabels() = win 0x22fae0;
     void updateZoom(float, float, int, float, int, int) = win 0x230590, imac 0x13f010;
     TodoReturn visitWithColorFlash();
@@ -14933,7 +14933,7 @@ class PlayerObject : GameObject, AnimatedSpriteDelegate {
         this->runNormalRotation(false, 1.0f);
     }
     void runNormalRotation(bool, float) = win 0x9999999, imac 0x3ee220, m1 0x36f618;
-    void runRotateAction(bool, int) = win 0x3775c0;
+    void runRotateAction(bool, int) = win 0x3775c0, m1 0x371934;
     TodoReturn saveToCheckpoint(PlayerCheckpoint*) = imac 0x40a6b0;
     void setSecondColor(cocos2d::ccColor3B const&) = win 0x387610, imac 0x3ec3a0, m1 0x36dd8c;
     void setupStreak() = win 0x372a50, imac 0x3eab20, m1 0x36c84c;
@@ -15029,7 +15029,7 @@ class PlayerObject : GameObject, AnimatedSpriteDelegate {
 
     void updatePlayerSpriteExtra(gd::string);
     void updatePlayerSwingFrame(int) = win 0x388a20, imac 0x4061a0, m1 0x383e58;
-    void updateRobotAnimationSpeed() = win 0x38b350;
+    void updateRobotAnimationSpeed() = win 0x38b350, m1 0x387b4c;
     void updateRotation(float, float) = win 0x377370, imac 0x3f0d20, m1 0x371b20;
     void updateRotation(float) = win 0x37b1f0, imac 0x3fb360, m1 0x37a378;
     void updateShipRotation(float) = win 0x37ae10;
@@ -15046,6 +15046,7 @@ class PlayerObject : GameObject, AnimatedSpriteDelegate {
     TodoReturn usingWallLimitedMode();
     TodoReturn yStartDown();
     TodoReturn yStartUp();
+    float getSettingsForStreak(ShipStreak *, float, float, float, float) = m1 0x369910, win 0x36fe00; // no idea what this function is but hey it exists
 
     cocos2d::CCNode* m_mainLayer;
     bool m_wasTeleported;

@@ -210,7 +210,7 @@ class cocos2d::CCMotionStreak : cocos2d::CCNodeRGBA, cocos2d::CCTextureProtocol 
     	m_fMaxSeg = maxSeg;
     }
     void setStartingPositionInitialized(bool);
-    void setStroke(float);
+    void setStroke(float) = m1 0x4b6c40;
 
     // CCMotionStreak(cocos2d::CCMotionStreak const&);
     CCMotionStreak() = imac inline, m1 0x4b5cf4 {
@@ -245,7 +245,7 @@ class cocos2d::CCMotionStreak : cocos2d::CCNodeRGBA, cocos2d::CCTextureProtocol 
     void resumeStroke() = m1 0x4b6510, imac 0x55fb40;
     void stopStroke() = m1 0x4b6508, imac 0x55fb30;
     void tintWithColor(cocos2d::_ccColor3B);
-    void updateFade(float) = imac 0x55fb10;
+    void updateFade(float) = imac 0x55fb10, m1 0x4b64f8;
 
     ~CCMotionStreak() = imac 0x55f3b0, m1 0x4b5e2c;
 
