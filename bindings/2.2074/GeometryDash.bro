@@ -210,7 +210,7 @@ class AchievementCell : TableViewCell {
     virtual bool init() = m1 0x1ec614, imac 0x23c930, ios 0x10ebb4;
     virtual void draw() = imac 0x23c940, m1 0x1ec61c, ios 0x10ebbc;
 
-    void loadFromDict(cocos2d::CCDictionary*) = win 0xac150, imac 0x230eb0;
+    void loadFromDict(cocos2d::CCDictionary*) = win 0xac150, imac 0x230eb0, m1 0x1e0ec4;
     void updateBGColor(int);
 }
 
@@ -806,41 +806,72 @@ class BoomScrollLayerDelegate {
 [[link(android)]]
 class BrowseSmartKeyLayer : BrowseSmartTemplateLayer {
     // virtual ~BrowseSmartKeyLayer();
+    BrowseSmartKeyLayer() {
+        m_prefabKey = "";
+        m_templatePage = 0;
+    }
 
-    static BrowseSmartKeyLayer* create(GJSmartTemplate*, gd::string);
+    static BrowseSmartKeyLayer* create(GJSmartTemplate*, gd::string) = win inline {
+        auto ret = new BrowseSmartKeyLayer();
+        if (ret->init(p0, p1)) {
+            ret->autorelease();
+            return ret;
+        }
+        delete ret;
+        return nullptr;
+    }
 
-    virtual void onBack(cocos2d::CCObject* sender) = m1 0x43c764, imac 0x4d9020, ios 0x779e0;
+    virtual void onBack(cocos2d::CCObject* sender) = win 0x4441b0, m1 0x43c764, imac 0x4d9020, ios 0x779e0;
 
-    TodoReturn addChanceToSelected(int, bool);
-    TodoReturn createTemplateObjects();
-    TodoReturn deletedSelectedItems();
-    TodoReturn getAllSelectedBlocks();
-    bool init(GJSmartTemplate*, gd::string) = m1 0x43b4bc, imac 0x4d7c90;
-    void onButton(cocos2d::CCObject* sender);
-    void onPrefabObject(cocos2d::CCObject* sender);
-    TodoReturn updateChanceValues();
+    void addChanceToSelected(int, bool);
+    void createTemplateObjects();
+    void deletedSelectedItems();
+    cocos2d::CCArray* getAllSelectedBlocks() = win 0x443ed0;
+    bool init(GJSmartTemplate*, gd::string) = win 0x4430d0, m1 0x43b4bc, imac 0x4d7c90;
+    void onButton(cocos2d::CCObject* sender) = win 0x443ab0;
+    void onPrefabObject(cocos2d::CCObject* sender) = win 0x4440d0;
+    void updateChanceValues() = win 0x443fa0;
+
+    gd::string m_prefabKey;
+    int m_templatePage;
 }
 
 [[link(android)]]
 class BrowseSmartTemplateLayer : FLAlertLayer {
     // virtual ~BrowseSmartTemplateLayer();
+    BrowseSmartTemplateLayer() = win 0x43e390 {
+        m_template = nullptr;
+        m_pages = nullptr;
+        m_page = 0;
+        m_nextPageBtn = nullptr;
+        m_prevPageBtn = nullptr;
+        m_dotsArray = nullptr;
+    }
 
-    static BrowseSmartTemplateLayer* create(GJSmartTemplate*, SmartBrowseFilter);
+    static BrowseSmartTemplateLayer* create(GJSmartTemplate*, SmartBrowseFilter) = win inline {
+        auto ret = new BrowseSmartTemplateLayer();
+        if (ret->init(p0, p1)) {
+            ret->autorelease();
+            return ret;
+        }
+        delete ret;
+        return nullptr;
+    }
 
     virtual void keyBackClicked() = win 0x443040, m1 0x43b324, imac 0x4d7a20, ios 0x76884;
     virtual void onBack(cocos2d::CCObject* sender) = win 0x443060, imac 0x4d7a60, m1 0x43b348, ios 0x768a8;
 
-    TodoReturn addObjectToPage(cocos2d::CCObject*, int);
-    TodoReturn addPrefabMenuItem(SmartPrefabResult, int);
-    TodoReturn baseSetup();
-    TodoReturn createDots();
-    TodoReturn createPrefab(gd::string, int);
-    void goToPage(int);
-    bool init(GJSmartTemplate*, SmartBrowseFilter) = m1 0x439948, imac 0x4d5f10;
-    void onClick(cocos2d::CCObject* sender);
+    void addObjectToPage(cocos2d::CCObject*, int) = win 0x4424b0;
+    void addPrefabMenuItem(SmartPrefabResult, int) = win 0x4420b0;
+    void baseSetup() = win 0x442540;
+    void createDots();
+    void createPrefab(gd::string, int) = win 0x442c60;
+    void goToPage(int) = win 0x442af0;
+    bool init(GJSmartTemplate*, SmartBrowseFilter) = win 0x441a40, m1 0x439948, imac 0x4d5f10;
+    void onClick(cocos2d::CCObject* sender) = win 0x442ff0;
     void onClose(cocos2d::CCObject* sender);
-    void onTemplateObject(cocos2d::CCObject* sender);
-    TodoReturn updateDots();
+    void onTemplateObject(cocos2d::CCObject* sender) = win 0x442d30;
+    void updateDots();
 
     GJSmartTemplate* m_template;
     cocos2d::CCArray* m_pages;
@@ -1020,16 +1051,38 @@ class CCAnimatedSprite : cocos2d::CCSprite {
 class CCAnimateFrameCache : cocos2d::CCObject {
     // virtual ~CCAnimateFrameCache();
 
-    static CCAnimateFrameCache* sharedSpriteFrameCache() = win 0x41450;
+    static CCAnimateFrameCache* sharedSpriteFrameCache() = win 0x41450, m1 0x4ab09c, imac 0x5542d0;
 
-    void addCustomSpriteFramesWithFile(char const*);
-    TodoReturn addDict(cocos2d::CCDictionary*, char const*);
-    TodoReturn addDict(DS_Dictionary*, char const*);
-    void addSpriteFramesWithFile(char const*) = win 0x414e0;
-    bool init();
-    TodoReturn purgeSharedSpriteFrameCache();
-    void removeSpriteFrames();
-    TodoReturn spriteFrameByName(char const*);
+    void addCustomSpriteFramesWithFile(char const*) = m1 0x4ab2a0, imac 0x554510;
+    cocos2d::CCDictionary* addDict(cocos2d::CCDictionary*, char const*) = m1 0x4abdb0, imac 0x5551e0;
+    cocos2d::CCDictionary* addDict(DS_Dictionary*, char const*) = win 0x41670, m1 0x4ac488, imac 0x5558b0;
+    cocos2d::CCDictionary* addSpriteFramesWithFile(char const*) = win 0x414e0, m1 0x4ac224, imac 0x555650;
+    bool init() = win inline, m1 0x4ab130, imac 0x554370 {
+        m_animateFrames = cocos2d::CCDictionary::create();
+        m_animateFrames->retain();
+        m_unk040 = cocos2d::CCDictionary::create();
+        m_unk040->retain();
+        m_animateDescriptions = cocos2d::CCDictionary::create();
+        m_animateDescriptions->retain();
+        return true;
+    }
+    void purgeSharedSpriteFrameCache() = win inline, m1 0x4ab174, imac 0x5543c0 {
+        auto** instancePtr = reinterpret_cast<CCAnimateFrameCache**>(geode::base::get() + 0x6a4e10);
+        if (*instancePtr) {
+            (*instancePtr)->release();
+            *instancePtr = nullptr;
+        }
+    }
+    void removeSpriteFrames() = win inline, m1 0x4acbf4, imac 0x556030 {
+        m_animateFrames->removeAllObjects();
+        m_unk040->removeAllObjects();
+        m_animateDescriptions->removeAllObjects();
+    }
+    cocos2d::CCArray* spriteFrameByName(char const*) = win 0x41c40, m1 0x4acc24, imac 0x556060;
+
+    cocos2d::CCDictionary* m_animateFrames;
+    cocos2d::CCDictionary* m_unk040;
+    cocos2d::CCDictionary* m_animateDescriptions;
 }
 
 [[link(android)]]
@@ -4018,7 +4071,7 @@ class EditorUI : cocos2d::CCLayer, FLAlertLayerProtocol, ColorSelectDelegate, GJ
     void activateRotationControl(cocos2d::CCObject*) = win 0x121420;
     void activateScaleControl(cocos2d::CCObject*) = win 0x113280;
     void activateTransformControl(cocos2d::CCObject*) = win 0x1138d0, m1 0x3aec4, imac 0x40720;
-    TodoReturn addObjectsToSmartTemplate(GJSmartTemplate*, cocos2d::CCArray*);
+    void addObjectsToSmartTemplate(GJSmartTemplate*, cocos2d::CCArray*) = win 0x114390;
     TodoReturn addSnapPosition(cocos2d::CCPoint);
     TodoReturn alignObjects(cocos2d::CCArray*, bool);
     void applyOffset(GameObject*) = win 0x120d40;
@@ -4050,20 +4103,20 @@ class EditorUI : cocos2d::CCLayer, FLAlertLayerProtocol, ColorSelectDelegate, GJ
     void createLoop();
     void createMoveMenu() = win 0x119350, m1 0x400a8, imac 0x464d0;
     TodoReturn createNewKeyframeAnim();
-    TodoReturn createObject(int, cocos2d::CCPoint) = win 0x10e840;
+    GameObject* createObject(int, cocos2d::CCPoint) = win 0x10e840;
     TodoReturn createOutlines(cocos2d::CCArray*);
-    TodoReturn createPrefab(GJSmartTemplate*, gd::string, int);
+    void createPrefab(GJSmartTemplate*, gd::string, int) = win 0x1160f0;
     TodoReturn createRockBases(cocos2d::CCArray*) = win 0x12da00, imac 0x5fd600;
     TodoReturn createRockEdges(cocos2d::CCArray*);
-    TodoReturn createSmartObjectsFromTemplate(GJSmartTemplate*, cocos2d::CCArray*, bool, bool, bool, bool);
-    TodoReturn createSmartObjectsFromType(int, cocos2d::CCArray*, bool, bool);
+    void createSmartObjectsFromTemplate(GJSmartTemplate*, cocos2d::CCArray*, bool, bool, bool, bool) = win 0x115580;
+    void createSmartObjectsFromType(int, cocos2d::CCArray*, bool, bool) = win 0x116660;
     UndoObject* createUndoObject(UndoCommand, bool) = win 0x10f830, imac 0x3d3e0;
     TodoReturn createUndoSelectObject(bool) = win 0x10fb50;
     TodoReturn deactivateRotationControl();
     TodoReturn deactivateScaleControl() = win 0x113480;
     TodoReturn deactivateTransformControl() = win 0x113ad0;
     void deleteObject(GameObject*, bool) = imac 0x32f70;
-    TodoReturn deleteSmartBlocksFromObjects(cocos2d::CCArray*);
+    void deleteSmartBlocksFromObjects(cocos2d::CCArray*) = win 0x116500;
     TodoReturn deleteTypeFromObjects(int, cocos2d::CCArray*);
     void deselectAll() = win 0x10fd80, imac 0x33240, m1 0x328b0;
     void deselectObject() = win 0x10fc60, imac 0x33450;
@@ -4109,13 +4162,13 @@ class EditorUI : cocos2d::CCLayer, FLAlertLayerProtocol, ColorSelectDelegate, GJ
     TodoReturn getGroupInfo(GameObject*, cocos2d::CCArray*, int&, int&, int&);
     cocos2d::CCPoint getLimitedPosition(cocos2d::CCPoint) = win 0x11e6f0;
     CCMenuItemSpriteExtra* getModeBtn(char const*, int);
-    TodoReturn getNeighbor(int, cocos2d::CCPoint, GJSmartDirection, cocos2d::CCArray*);
+    cocos2d::CCNode* getNeighbor(int, cocos2d::CCPoint, GJSmartDirection, cocos2d::CCArray*) = win 0x116f30;
     TodoReturn getRandomStartKey(int);
     TodoReturn getRelativeOffset(GameObject*) = imac 0x4dc100;
     cocos2d::CCArray* getSelectedObjects() = win 0x10f780, m1 0x37eac, imac 0x3d330;
     TodoReturn getSimpleButton(gd::string, cocos2d::SEL_MenuHandler, cocos2d::CCMenu*);
-    TodoReturn getSmartNeighbor(SmartGameObject*, cocos2d::CCPoint, GJSmartDirection, cocos2d::CCArray*);
-    TodoReturn getSmartObjectKey(int, GJSmartDirection);
+    SmartGameObject* getSmartNeighbor(SmartGameObject*, cocos2d::CCPoint, GJSmartDirection, cocos2d::CCArray*) = win 0x116e10;
+    static int getSmartObjectKey(int, GJSmartDirection);
     TodoReturn getSnapAngle(GameObject*, cocos2d::CCArray*) = imac 0x4ad60;
     CCMenuItemSpriteExtra* getSpriteButton(char const* spriteFrameName, cocos2d::SEL_MenuHandler selector, cocos2d::CCMenu* menu, float scale, int buttonKind, cocos2d::CCPoint offset) = win 0xe11d0;
     CCMenuItemSpriteExtra* getSpriteButton(char const* spriteFrameName, cocos2d::SEL_MenuHandler selector, cocos2d::CCMenu* menu, float scale) = win inline, imac 0xc2d0, m1 0xd6b0 {
@@ -4140,9 +4193,9 @@ class EditorUI : cocos2d::CCLayer, FLAlertLayerProtocol, ColorSelectDelegate, GJ
     void onColorFilter(cocos2d::CCObject* sender);
     void onCopy(cocos2d::CCObject* sender);
     void onCopyState(cocos2d::CCObject* sender) = win 0x112ac0;
-    bool onCreate() = win 0x10dd10, imac 0x2e600;
+    bool onCreate() = win 0x10dd10, m1 0x2dfac, imac 0x2e600;
     void onCreateButton(cocos2d::CCObject* sender) = win 0x10d880, imac 0x34d30, m1 0x342c0;
-    void onCreateObject(int) = win 0x10df10;
+    void onCreateObject(int) = win 0x10df10, m1 0x34758, imac 0x35170;
     void onDelete(cocos2d::CCObject* sender) = win 0xe4760;
     void onDeleteAll(cocos2d::CCObject* sender);
     void onDeleteCustomItem(cocos2d::CCObject* sender) = win 0xe2e80;
@@ -4188,7 +4241,7 @@ class EditorUI : cocos2d::CCLayer, FLAlertLayerProtocol, ColorSelectDelegate, GJ
     TodoReturn positionIsInSnapped(cocos2d::CCPoint);
     TodoReturn positionWithoutOffset(GameObject*);
     TodoReturn processSelectObjects(cocos2d::CCArray*) = imac 0x3d880;
-    TodoReturn processSmartObjectsFromType(int, cocos2d::CCArray*, cocos2d::CCArray*, cocos2d::CCArray*, cocos2d::CCArray*);
+    void processSmartObjectsFromType(int, cocos2d::CCArray*, cocos2d::CCArray*, cocos2d::CCArray*, cocos2d::CCArray*) = win 0x116b80;
     void recreateButtonTabs();
     void redoLastAction(cocos2d::CCObject*) = win 0x110190;
     void reloadCustomItems() {
@@ -4230,7 +4283,7 @@ class EditorUI : cocos2d::CCLayer, FLAlertLayerProtocol, ColorSelectDelegate, GJ
     void showMaxError() = win 0x111170, m1 0x342fc, imac 0x34d70;
     void showUI(bool) = win 0x110200, m1 0x388f4, imac 0x3de00;
     void sliderChanged(cocos2d::CCObject*) = win 0xe13a0, imac 0xbd50;
-    TodoReturn smartTypeForKey(int);
+    static int smartTypeForKey(int) = win 0x12b890;
     cocos2d::CCSprite* spriteFromObjectString(gd::string str, bool, bool, int objLimit, cocos2d::CCArray*, cocos2d::CCArray*, GameObject*) = win 0x10c790, imac 0x344a0, m1 0x33ab0;
     TodoReturn toggleDuplicateButton();
     void toggleEditObjectButton() = win 0x118f10;
@@ -4684,11 +4737,11 @@ class EndLevelLayer : GJDropDownLayer {
     virtual void enterAnimFinished() = m1 0x418a60, imac 0x4afd90, ios 0x2f8174 {}
     virtual void keyUp(cocos2d::enumKeyCodes) = m1 0x419320, imac 0x4b06b0, ios 0x2f8980 {}
 
-    TodoReturn coinEnterFinished(cocos2d::CCPoint) = win 0x134230;
-    TodoReturn coinEnterFinishedO(cocos2d::CCObject*) = win 0x1341f0;
-    TodoReturn currencyEnterFinished();
-    TodoReturn diamondEnterFinished();
-    TodoReturn getCoinString() = win 0x132d30, m1 0x4174b8, imac 0x4ae840;
+    void coinEnterFinished(cocos2d::CCPoint) = win 0x134230, m1 0x418e98, imac 0x4b0230;
+    void coinEnterFinishedO(cocos2d::CCObject*) = win 0x1341f0, m1 0x418e4c, imac 0x4b01f0;
+    void currencyEnterFinished();
+    void diamondEnterFinished();
+    gd::string getCoinString() = win 0x132d30, m1 0x4174b8, imac 0x4ae840;
     const char* getEndText() = win 0x135190, m1 0x6c7abc, imac 0x4aea80;
     void goEdit() = win 0x1336e0;
     bool init(PlayLayer* playLayer);
@@ -4704,8 +4757,8 @@ class EndLevelLayer : GJDropDownLayer {
     void playDiamondEffect(float) = win 0x1349f0;
     void playEndEffect() = win 0x134e80;
     void playStarEffect(float) = win 0x133ab0;
-    TodoReturn starEnterFinished() = win 0x133e50;
-    TodoReturn tryShowBanner(float);
+    void starEnterFinished() = win 0x133e50;
+    void tryShowBanner(float);
 
     PlayLayer* m_playLayer;
     bool m_notLocal;
@@ -4792,7 +4845,7 @@ class EnhancedGameObject : GameObject {
     virtual void updateSyncedAnimation(float, int) = win 0x1a4e30, imac 0x2499e0, m1 0x1f7c7c, ios 0x347598;
     virtual TodoReturn updateAnimateOnTrigger(bool) = imac 0x24b920, m1 0x1f903c, ios 0x348938;
 
-    TodoReturn createRotateAction(float, int);
+    void createRotateAction(float angle, int clockwiseDirection);
     bool init(char const*) = win 0x1a1800;
     TodoReturn previewAnimateOnTrigger();
     TodoReturn refreshRotateAction();
@@ -4806,18 +4859,33 @@ class EnhancedGameObject : GameObject {
     void updateUserCoin() = win 0x1a3970, imac 0x5a9770, m1 0x4e3b94;
     TodoReturn waitForAnimationTrigger();
 
-    PAD = android32 0x25, win 0x2a, android64 0x22, mac 0x22;
-
+    // Everyone loves itanium padding
+    bool m_unknownPadding;
+    bool m_poweredOn;
+    int m_state;
+    int m_animationRandomizedStartValue;
+    float m_animationStart;
+    // No idea what these 3 fields are supposed to be. But we know what types they are...
+    float field4_0xd;
+    int field5_0x11;
+    bool field6_0x15;
+    float m_frameTime;
+    bool m_visible;
+    bool m_shouldNotHideAnimFreeze;
+    bool m_usesSpecialAnimation;
+    short m_frames;
     bool m_hasCustomAnimation;
     bool m_hasCustomRotation;
     // property 98
     bool m_disableRotation;
-    PAD = android32 0x3, win 0x3, android64 0x3, mac 0x3;
 
     // property 97
     float m_rotationSpeed;
-    PAD = android32 0xc, win 0xc, android64 0xc, mac 0xc;
 
+    float m_rotationAngle; 
+    float m_rotationDelta;
+    float m_rotationAnimationSpeed;
+    
     // property 106
     bool m_animationRandomizedStart;
     // property 107
@@ -4834,16 +4902,21 @@ class EnhancedGameObject : GameObject {
     int m_singleFrame;
     // property 592
     bool m_animationOffset;
-    PAD = android32 0xf, win 0xf, android64 0xf, mac 0xf;
-
+    bool m_animationTriggered;
+    int m_unkAnimationInt;
+    int m_maybeAnimationVariableXInt;
+    int m_maybeAnimationVariableYInt;
     // property 214
     bool m_animateOnlyWhenActive;
     // property 444
     bool m_isNoMultiActivate;
     // property 99
     bool m_isMultiActivate;
-    PAD = android32 0x4, win 0x4, android64 0x8, mac 0x8;
-}
+    bool m_activated;
+    bool m_activatedByPlayer1;
+    bool m_activatedByPlayer2;
+    bool m_hasUniqueCoin;
+}    
 
 [[link(android)]]
 class EnhancedTriggerObject : EffectGameObject {
@@ -5143,7 +5216,7 @@ class FMODAudioEngine : cocos2d::CCNode {
     float getBackgroundMusicVolume() = win inline, imac 0x3d4880, m1 0x35ad68 {
         return m_musicVolume;
     }
-    FMOD::ChannelGroup* getChannelGroup(int, bool) = win 0x56b20;
+    FMOD::ChannelGroup* getChannelGroup(int, bool) = win 0x56b20, m1 0x358208, imac 0x3d1240;
     float getEffectsVolume() {
         return m_sfxVolume;
     }
@@ -5530,7 +5603,7 @@ class FriendsProfilePage : FLAlertLayer, FLAlertLayerProtocol, UploadActionDeleg
     bool init(UserListType type) = win 0x13e160, imac 0x641910, m1 0x56a498;
     void onBlocked(cocos2d::CCObject* sender) = win 0x13ef50, m1 0x56abb8, imac 0x6420b0;
     void onClose(cocos2d::CCObject* sender) = win 0x13efe0, m1 0x56ab00, imac 0x641ff0;
-    void onUpdate(cocos2d::CCObject* sender) = m1 0x56ac44, imac 0x642140;
+    void onUpdate(cocos2d::CCObject* sender) = win 0x13EE30, m1 0x56ac44, imac 0x642140;
     void setupUsersBrowser(cocos2d::CCArray* users, UserListType type) = win 0x13e870, imac 0x6421b0, m1 0x56aca8;
 
     UserListType m_type;
@@ -6522,7 +6595,7 @@ class GameManager : GManager {
 [[link(android)]]
 class GameObject : CCSpritePlus {
     // virtual ~GameObject();
-    GameObject() = win 0x135ba0;
+    GameObject() = win 0x135ba0, m1 0x199f78, imac 0x1e2350, ios 0x22ee90;
     static GameObject* createWithFrame(char const* name) = win 0x18aca0, imac 0x58a280, m1 0x4d7884;
     static GameObject* createWithKey(int) = win 0x188850, imac 0x585720, m1 0x4d73bc;
     static GameObject* objectFromVector(gd::vector<gd::string>&, gd::vector<void*>&, GJBaseGameLayer*, bool) = win 0x19a260, m1 0x4e2090;
@@ -6620,7 +6693,7 @@ class GameObject : CCSpritePlus {
     cocos2d::CCSprite* addCustomChild(gd::string, cocos2d::CCPoint, int);
     cocos2d::CCSprite* addCustomColorChild(gd::string);
     void addEmptyGlow() = m1 0x4d825c;
-    void addGlow(gd::string);
+    void addGlow(gd::string) = win 0x18af60;
     cocos2d::CCSprite* addInternalChild(cocos2d::CCSprite*, gd::string, cocos2d::CCPoint, int);
     cocos2d::CCSprite* addInternalCustomColorChild(gd::string, cocos2d::CCPoint, int);
     cocos2d::CCSprite* addInternalGlowChild(gd::string, cocos2d::CCPoint);
@@ -6713,7 +6786,12 @@ class GameObject : CCSpritePlus {
     bool ignoreEditorDuration();
     bool ignoreEnter();
     bool ignoreFade();
-    bool init(char const*) = m1 0x4d7914;
+    bool init(char const* frame) = win inline, m1 0x4d7914 {
+        if (!CCSpritePlus::initWithSpriteFrameName(frame)) return false;
+        this->commonSetup();
+        m_bUnkBool2 = true;
+        return true;
+    }
     bool isBasicEnterEffect(int);
     bool isBasicTrigger();
     bool isColorObject();
@@ -7487,14 +7565,14 @@ class GauntletLayer : cocos2d::CCLayer, LevelManagerDelegate {
         delete ret;
         return nullptr;
     }
-    static cocos2d::CCScene* scene(GauntletType) = win 0x1f2920, m1 0x30fb40;
+    static cocos2d::CCScene* scene(GauntletType) = win 0x1f2920, m1 0x30fb40, imac 0x37f5f0;
 
     virtual void keyBackClicked() = win 0x1f4f50, imac 0x381960, m1 0x311db0, ios 0x233c90;
     virtual void loadLevelsFinished(cocos2d::CCArray*, char const*, int) = win 0x1f3440, imac 0x380f10, m1 0x311274, ios 0x2335f0;
     virtual void loadLevelsFailed(char const*, int) = win 0x1f3650, m1 0x31141c, imac 0x3810b0, ios 0x2336c4;
 
     bool init(GauntletType) = win 0x1f2c50, m1 0x30fcf0, imac 0x37f7e0;
-    void onBack(cocos2d::CCObject* sender) = win 0x1f4f00;
+    void onBack(cocos2d::CCObject* sender) = win 0x1f4f00, m1 0x31034c, imac 0x37fe50;
     void onLevel(cocos2d::CCObject* sender) = win 0x1f4880, imac 0x381320, m1 0x3116ec;
     void setupGauntlet(cocos2d::CCArray*) = win 0x1f3850, imac 0x37fea0, m1 0x310394;
     void unlockActiveItem() = win 0x1f48f0, imac 0x381360, m1 0x311730;
@@ -7514,7 +7592,7 @@ class GauntletNode : cocos2d::CCNode {
     // virtual ~GauntletNode();
     GauntletNode() {}
 
-    static GauntletNode* create(GJMapPack* gauntlet) = win inline {
+    static GauntletNode* create(GJMapPack* gauntlet) = win inline, m1 0x4b2728, imac 0x55c250 {
         auto ret = new GauntletNode();
         if (ret->init(gauntlet)) {
             ret->autorelease();
@@ -7527,7 +7605,7 @@ class GauntletNode : cocos2d::CCNode {
     static gd::string frameForType(GauntletType) = win 0x1f9030, m1 0x4b4e50, imac 0x55e760;
     static gd::string nameForType(GauntletType) = win 0x1fa250, m1 0x4b46dc, imac 0x55e210;
     bool init(GJMapPack*) = win 0x1f7970, imac 0x55cb50, m1 0x4b2fdc;
-    void onClaimReward() = win 0x1f8ff0, imac 0x55ca80;
+    void onClaimReward() = win 0x1f8ff0, imac 0x55ca80, m1 0x4b2f30;
 
     cocos2d::CCNode* m_gauntletInfoNode;
     cocos2d::CCNode* m_rewardNode;
@@ -7538,7 +7616,7 @@ class GauntletSelectLayer : cocos2d::CCLayer, BoomScrollLayerDelegate, LevelMana
     // virtual ~GauntletSelectLayer();
     GauntletSelectLayer() {}
 
-    static GauntletSelectLayer* create(int p0) = win inline, imac 0x55abc0 {
+    static GauntletSelectLayer* create(int p0) = win inline, imac 0x55abc0, m1 0x4b1248 {
         auto ret = new GauntletSelectLayer();
         if (ret->init(p0)) {
             ret->autorelease();
@@ -7547,9 +7625,9 @@ class GauntletSelectLayer : cocos2d::CCLayer, BoomScrollLayerDelegate, LevelMana
         delete ret;
         return nullptr;
     }
-    static cocos2d::CCScene* scene(int) = win 0x1f5570, imac 0x55aaa0;
+    static cocos2d::CCScene* scene(int) = win 0x1f5570, imac 0x55aaa0, m1 0x4b1168;
 
-    virtual void onExit() = m1 0x4b2f70, imac 0x55cac0, ios 0x1c1d9c;
+    virtual void onExit() = win 0x1f7920, m1 0x4b2f70, imac 0x55cac0, ios 0x1c1d9c;
     virtual void keyBackClicked() = win 0x1f7180, m1 0x4b2e44, imac 0x55c990, ios 0x1c1d50;
     virtual void scrollLayerWillScrollToPage(BoomScrollLayer*, int) = win 0x1f7090, m1 0x4b2da4, imac 0x55c8f0, ios 0x1c1cb0;
     virtual void scrollLayerScrolledToPage(BoomScrollLayer*, int) = win 0x1f7090, m1 0x4b2d04, imac 0x55c850, ios 0x1c1c10;
@@ -7560,13 +7638,16 @@ class GauntletSelectLayer : cocos2d::CCLayer, BoomScrollLayerDelegate, LevelMana
     bool init(int) = win 0x1f56a0, m1 0x4b1310, imac 0x55acb0;
     void onBack(cocos2d::CCObject* sender) = win 0x1f70d0, imac 0x55b7c0, m1 0x4b1d5c;
     void onInfo(cocos2d::CCObject* sender) = win 0x1f6210, m1 0x4b1dd0, imac 0x55b830;
-    void onNext(cocos2d::CCObject* sender) = win 0x1f6ee0, imac 0x55b7a0;
+    void onNext(cocos2d::CCObject* sender) = win 0x1f6ee0, imac 0x55b7a0, m1 0x4b1d48;
     void onPlay(cocos2d::CCObject* sender) = win 0x1f7190, imac 0x55c2d0, m1 0x4b27b8;
-    void onPrev(cocos2d::CCObject* sender) = win 0x1f6f00, imac 0x55b780;
+    void onPrev(cocos2d::CCObject* sender) = win 0x1f6f00, imac 0x55b780, m1 0x4b1d34;
     void onRefresh(cocos2d::CCObject* sender) = win 0x1f6350, imac 0x55b8e0, m1 0x4b1e88;
     void setupGauntlets() = win 0x1f6790, m1 0x4b1f30, imac 0x55b9a0;
-    void unblockPlay();
-    void updateArrows();
+    void unblockPlay() = win 0x1f7080, m1 0x4b2cfc, imac 0x55c840;
+    void updateArrows() = win inline, m1 0x4b23c4, imac 0x55bec0 {
+        m_leftButton->setVisible(m_scrollLayer != nullptr);
+        m_rightButton->setVisible(m_scrollLayer != nullptr);
+    }
 
     cocos2d::CCSprite* m_backgroundSprite;
     BoomScrollLayer* m_scrollLayer;
@@ -7597,9 +7678,22 @@ class GauntletSprite : cocos2d::CCNode {
     }
 
     void addLockedSprite() = win 0x1f4fe0, imac 0x381b50, m1 0x311fe8;
-    void addNormalSprite() = imac 0x381a80, m1 0x311eec;
-    cocos2d::ccColor3B colorForType(GauntletType);
-    bool init(GauntletType gauntletType, bool locked) = win inline, m1 0x311e44 {
+    void addNormalSprite() = win inline, imac 0x381a80, m1 0x311eec {
+        auto normalSprite = cocos2d::CCSprite::createWithSpriteFrameName(GauntletNode::frameForType(m_gauntletType).c_str());
+        this->addChild(normalSprite);
+        normalSprite->setPosition(this->getContentSize() / 2);
+    }
+    cocos2d::ccColor3B colorForType(GauntletType gauntletType) = win inline, m1 0x312314, imac 0x381e70 {
+        switch (gauntletType) {
+            case GauntletType::Fire: return { 255, 200, 200 };
+            case GauntletType::Lava: return { 200, 200, 200 };
+            case GauntletType::Bonus: return { 225, 225, 100 };
+            case GauntletType::Monster: return { 200, 200, 200 };
+            case GauntletType::Doom: return { 200, 200, 200 };
+            default: return { 225, 225, 225 };
+        }
+    }
+    bool init(GauntletType gauntletType, bool locked) = win inline, m1 0x311e44, imac 0x381a00 {
         if (!CCNode::init()) return false;
 
         m_gauntletType = gauntletType;
@@ -7608,7 +7702,18 @@ class GauntletSprite : cocos2d::CCNode {
 
         return true;
     }
-    float luminanceForType(GauntletType) = imac 0x381e40;
+    float luminanceForType(GauntletType gauntletType) = win inline, imac 0x381e40, m1 0x3122f4 {
+        switch (gauntletType) {
+            case GauntletType::Fire: return 1.1f;
+            case GauntletType::Ice: return 0.9f;
+            case GauntletType::Shadow: return 1.6f;
+            case GauntletType::Lava: return 1.3f;
+            case GauntletType::Bonus: return 0.9f;
+            case GauntletType::Chaos: return 1.5f;
+            case GauntletType::Spike: return 0.8f;
+            default: return 1.0f;
+        }
+    }
     void toggleLockedSprite(bool) = win 0x1f5310, imac 0x381930, m1 0x311d70;
 
     GauntletType m_gauntletType;
@@ -7934,7 +8039,7 @@ class GJBaseGameLayer : cocos2d::CCLayer, TriggerEffectDelegate {
     TodoReturn claimParticle(gd::string, int);
     TodoReturn claimRotationAction(int, int, float&, float&, bool, bool);
     TodoReturn clearActivatedAudioTriggers() = imac 0x148ac0;
-    TodoReturn clearPickedUpItems() = m1 0x292260;
+    TodoReturn clearPickedUpItems();
     TodoReturn collectedObject(EffectGameObject*);
     void collisionCheckObjects(PlayerObject*, gd::vector<GameObject*>*, int, float) = win 0x20f480, imac 0x116130, m1 0xf5554;
     TodoReturn controlAdvancedFollowCommand(AdvancedFollowTriggerObject*, int, GJActionCommand);
@@ -8176,7 +8281,7 @@ class GJBaseGameLayer : cocos2d::CCLayer, TriggerEffectDelegate {
     void setupLevelStart(LevelSettingsObject*) = win 0x20cd60, imac 0x112f20, m1 0xf28b8;
     void setupReplay(gd::string) = win 0x234360, m1 0x11cd28;
     void shakeCamera(float duration, float strength, float interval) = win 0x2356c0;
-    bool shouldExitHackedLevel() = win 0x205d10, imac 0x102b90;
+    bool shouldExitHackedLevel() = win 0x205d10, imac 0x102b90, m1 0xe49d0;
     TodoReturn sortAllGroupsX();
     TodoReturn sortGroups();
     void sortSectionVector() = win 0x221cc0, imac 0x12faf0, m1 0x10a4a8;
@@ -8217,9 +8322,9 @@ class GJBaseGameLayer : cocos2d::CCLayer, TriggerEffectDelegate {
         }
         this->toggleGlitter(true);
     }
-    void switchToRobotMode(PlayerObject*, GameObject*, bool) = imac 0x113cd0;
-    void switchToRollMode(PlayerObject*, GameObject*, bool) = imac 0x113c20;
-    void switchToSpiderMode(PlayerObject*, GameObject*, bool) = imac 0x113d80, m1 0xf35b0;
+    void switchToRobotMode(PlayerObject*, GameObject*, bool) = win 0x20d760, imac 0x113cd0, m1 0xf3504;
+    void switchToRollMode(PlayerObject*, GameObject*, bool) = win 0x20d940, imac 0x113c20, m1 0xf3458;
+    void switchToSpiderMode(PlayerObject*, GameObject*, bool) = win 0x20d850, imac 0x113d80, m1 0xf35b0;
     void syncBGTextures() = win 0x234a10, imac 0x147c70, m1 0x11dbd8;
     void teleportPlayer(TeleportPortalObject*, PlayerObject*) = win 0x20aa80, imac 0x110400, m1 0xf00d8;
     TodoReturn testInstantCountTrigger(int, int, int, bool, int, gd::vector<int> const&, int, int);
@@ -10190,13 +10295,13 @@ class GJPathsLayer : FLAlertLayer, FLAlertLayerProtocol {
 class GJPathSprite : CCSpriteCOpacity {
     // virtual ~GJPathSprite();
 
-    static GJPathSprite* create(int) = win 0x281720, m1 0x284ad4;
+    static GJPathSprite* create(int) = win 0x281720, m1 0x284ad4, imac 0x2ea590;
 
-    void addRankLabel(int) = m1 0x288c2c;
+    void addRankLabel(int) = m1 0x288c2c, imac 0x2eeb50;
     void addShardSprite() = win 0x281d90, imac 0x2ee610, m1 0x2886c0;
     void changeToLockedArt() = win 0x281ad0, imac 0x2ed5b0, m1 0x287840;
-    bool init(int) = imac 0x2eea20;
-    void updateState() = m1 0x284b80;
+    bool init(int) = m1 0x288b0c, imac 0x2eea20;
+    void updateState() = win 0x2818f0, m1 0x284b80, imac 0x2ea630;
 
     int m_pathNumber;
 }
@@ -10944,16 +11049,26 @@ class GJShopLayer : cocos2d::CCLayer, GJPurchaseDelegate, DialogDelegate, Reward
 class GJSmartBlockPreview : cocos2d::CCNode {
     // virtual ~GJSmartBlockPreview();
 
-    static GJSmartBlockPreview* create(gd::string);
+    static GJSmartBlockPreview* create(gd::string) = win 0x2ae310;
 
-    TodoReturn addChance(int, int) = m1 0x392550, imac 0x416ac0;
-    TodoReturn addCount(int);
-    TodoReturn addPreview(gd::string, gd::string, LevelEditorLayer*);
-    TodoReturn addTemplateGuide(gd::string, int);
-    TodoReturn addTemplateGuide(SmartPrefabResult, float);
-    TodoReturn createInfoLabel();
-    bool init(gd::string);
-    TodoReturn toggleSelectItem(bool);
+    void addChance(int, int) = win 0x2af0b0, m1 0x392550, imac 0x416ac0;
+    void addCount(int);
+    void addPreview(gd::string, gd::string, LevelEditorLayer*) = win 0x2aef30;
+    void addTemplateGuide(gd::string, int) = win 0x2ae450;
+    cocos2d::CCArray* addTemplateGuide(SmartPrefabResult, float) = win 0x2ae6e0;
+    void createInfoLabel();
+    bool init(gd::string key) = win inline {
+        if (!cocos2d::CCNode::init()) return false;
+        this->setContentSize({ 90.f, 90.f });
+        m_prefabKey = key;
+        return true;
+    }
+    void toggleSelectItem(bool);
+
+    gd::string m_prefabKey;
+    cocos2d::CCLabelBMFont* m_infoLabel;
+    cocos2d::CCSprite* m_selectSprite;
+    bool m_selected;
 }
 
 [[link(android)]]
@@ -10962,22 +11077,34 @@ class GJSmartBlockPreviewSprite : cocos2d::CCNode {
 
     static GJSmartBlockPreviewSprite* create();
 
-    virtual bool init() = m1 0x3927f0, imac 0x416d80, ios 0xd46c;
-    virtual void visit() = imac 0x416d90, m1 0x3927f4, ios 0xd470;
+    virtual bool init() = win 0x77db0, m1 0x3927f0, imac 0x416d80, ios 0xd46c;
+    virtual void visit() = win 0x2af2b0, imac 0x416d90, m1 0x3927f4, ios 0xd470;
 }
 
 [[link(android)]]
 class GJSmartPrefab : cocos2d::CCObject {
     // virtual ~GJSmartPrefab();
 
-    static GJSmartPrefab* create();
+    static GJSmartPrefab* create() = win 0x2ae230;
 
     virtual void encodeWithCoder(DS_Dictionary*) = win 0x2ae2b0, imac 0x415c60, m1 0x391654, ios 0xc604;
-    virtual bool canEncode() = m1 0x3914f4, imac 0x415b10, ios 0xc550;
+    virtual bool canEncode() = m1 0x3914f4, imac 0x415b10, ios 0xc550 { return true; }
 
-    TodoReturn createWithCoder(DS_Dictionary*) = imac 0x415b20, m1 0x3914fc;
-    void dataLoaded(DS_Dictionary*);
+    static GJSmartPrefab* createWithCoder(DS_Dictionary* dict) = win inline, imac 0x415b20, m1 0x3914fc {
+        auto ret = GJSmartPrefab::create();
+        ret->dataLoaded(dict);
+        return ret;
+    }
+    void dataLoaded(DS_Dictionary* dict) = win inline {
+        m_prefabData = dict->getStringForKey("1");
+        m_prefabChance = dict->getIntegerForKey("2");
+    }
     bool init();
+
+    gd::string m_prefabKey;
+    gd::string m_prefabData;
+    int m_prefabID;
+    int m_prefabChance;
 }
 
 [[link(android)]]
@@ -10987,48 +11114,86 @@ class GJSmartTemplate : cocos2d::CCObject {
     static GJSmartTemplate* create() = win 0x2a92e0;
 
     virtual void encodeWithCoder(DS_Dictionary*) = win 0x2ae150, imac 0x415960, m1 0x3912e8, ios 0xc430;
-    virtual bool canEncode() = m1 0x390f40, imac 0x415580, ios 0xc1c4;
+    virtual bool canEncode() = m1 0x390f40, imac 0x415580, ios 0xc1c4 { return true; }
 
-    TodoReturn applyTransformationsForType(SmartBlockType, cocos2d::CCSprite*);
-    TodoReturn createWithCoder(DS_Dictionary*) = imac 0x415590, m1 0x390f48;
+    static void applyTransformationsForType(SmartBlockType, cocos2d::CCSprite*) = win 0x2ac080;
+    static GJSmartTemplate* createWithCoder(DS_Dictionary* dict) = win inline, imac 0x415590, m1 0x390f48 {
+        auto ret = GJSmartTemplate::create();
+        ret->dataLoaded(dict);
+        return ret;
+    }
     void dataLoaded(DS_Dictionary*) = win 0x2ade80;
-    TodoReturn flipBlockType(SmartBlockType, bool, bool);
-    TodoReturn flipBlockTypeX(SmartBlockType);
-    TodoReturn flipBlockTypeY(SmartBlockType);
-    TodoReturn flipKey(gd::string, bool, bool);
-    TodoReturn generateRemapDict();
-    TodoReturn getNoCornerKey(gd::string);
-    TodoReturn getPrefab(cocos2d::CCPoint, SmartGameObject*, SmartGameObject*, SmartGameObject*, SmartGameObject*, SmartGameObject*, SmartGameObject*, SmartGameObject*, SmartGameObject*, SmartGameObject*);
-    TodoReturn getPrefab(gd::string, bool, bool);
-    TodoReturn getPrefabs(gd::string);
-    TodoReturn getPrefabWithID(gd::string, int);
-    TodoReturn getRandomPrefab(gd::string);
-    TodoReturn getSimplifiedKey(gd::string);
-    TodoReturn getSimplifiedType(SmartBlockType, bool&);
-    TodoReturn getTemplateState(gd::vector<SmartPrefabResult>&);
-    TodoReturn getTotalChanceForPrefab(gd::string);
-    TodoReturn getVerySimplifiedKey(gd::string) = imac 0x411170;
-    bool init();
-    bool isUnrequired(gd::string);
-    TodoReturn keyFromNeighbors(cocos2d::CCPoint, SmartGameObject*, SmartGameObject*, SmartGameObject*, SmartGameObject*, SmartGameObject*, SmartGameObject*, SmartGameObject*, SmartGameObject*, SmartGameObject*);
-    TodoReturn keyFromNeighbors(SmartBlockType, SmartBlockType, SmartBlockType, SmartBlockType, SmartBlockType, SmartBlockType, SmartBlockType, SmartBlockType, SmartBlockType);
-    TodoReturn keyFromNeighborsOld(bool, bool, bool, bool, bool, bool, bool, bool);
-    TodoReturn logTemplateStatus(bool) = m1 0x390450, imac 0x4148f0;
-    TodoReturn offsetForDir(GJSmartDirection, int);
-    TodoReturn offsetForObject(SmartGameObject*);
-    TodoReturn offsetForType(SmartBlockType);
-    TodoReturn removePrefab(gd::string, int);
-    TodoReturn resetScannedPrefabs();
-    TodoReturn rotateBlockType(SmartBlockType, int);
-    TodoReturn rotateBlockType90(SmartBlockType);
-    TodoReturn rotateKey(gd::string, int);
-    TodoReturn savePrefab(gd::string, gd::string);
-    TodoReturn saveRemap(gd::string);
-    TodoReturn saveRemapToDict(gd::string, gd::string, cocos2d::CCDictionary*) = imac 0x410e20;
-    TodoReturn scanForPrefab(gd::string);
-    TodoReturn shouldDiscardObject(SmartBlockType, GJSmartDirection);
-    TodoReturn smartObjectToType(SmartGameObject*, cocos2d::CCPoint);
-    TodoReturn smartTypeToObjectKey(SmartBlockType);
+    static SmartBlockType flipBlockType(SmartBlockType, bool, bool) = win 0x2ac9b0;
+    static SmartBlockType flipBlockTypeX(SmartBlockType);
+    static SmartBlockType flipBlockTypeY(SmartBlockType);
+    static gd::string flipKey(gd::string, bool, bool) = win 0x2acfc0;
+    cocos2d::CCDictionary* generateRemapDict();
+    gd::string getNoCornerKey(gd::string) = win 0x2aa300;
+    GJSmartPrefab* getPrefab(cocos2d::CCPoint, SmartGameObject*, SmartGameObject*, SmartGameObject*, SmartGameObject*, SmartGameObject*, SmartGameObject*, SmartGameObject*, SmartGameObject*, SmartGameObject*);
+    GJSmartPrefab* getPrefab(gd::string, bool, bool) = win 0x2ab4e0;
+    cocos2d::CCArray* getPrefabs(gd::string);
+    GJSmartPrefab* getPrefabWithID(gd::string, int) = win 0x2abdd0;
+    GJSmartPrefab* getRandomPrefab(gd::string);
+    static gd::string getSimplifiedKey(gd::string) = win 0x2a9a10;
+    static SmartBlockType getSimplifiedType(SmartBlockType, bool&);
+    void getTemplateState(gd::vector<SmartPrefabResult>&) = win 0x2ad890;
+    int getTotalChanceForPrefab(gd::string) = win 0x2ab2b0;
+    static gd::string getVerySimplifiedKey(gd::string) = win 0x2aa1f0, imac 0x411170;
+    bool init() = win inline {
+        CC_SAFE_RELEASE(m_prefabArrays);
+        m_prefabArrays = cocos2d::CCDictionary::create();
+        m_prefabArrays->retain();
+        m_remapDict1 = cocos2d::CCDictionary::create();
+        m_remapDict1->retain();
+        m_remapDict2 = cocos2d::CCDictionary::create();
+        m_remapDict2->retain();
+        m_remapDict3 = cocos2d::CCDictionary::create();
+        m_remapDict3->retain();
+        m_remapDict4 = cocos2d::CCDictionary::create();
+        m_remapDict4->retain();
+        m_remapDict5 = cocos2d::CCDictionary::create();
+        m_remapDict5->retain();
+        m_remapDict6 = cocos2d::CCDictionary::create();
+        m_remapDict6->retain();
+        return true;
+    }
+    bool isUnrequired(gd::string) = win 0x2ad6f0;
+    static gd::string keyFromNeighbors(cocos2d::CCPoint, SmartGameObject*, SmartGameObject*, SmartGameObject*, SmartGameObject*, SmartGameObject*, SmartGameObject*, SmartGameObject*, SmartGameObject*, SmartGameObject*) = win 0x2ac450;
+    static gd::string keyFromNeighbors(SmartBlockType, SmartBlockType, SmartBlockType, SmartBlockType, SmartBlockType, SmartBlockType, SmartBlockType, SmartBlockType, SmartBlockType);
+    static gd::string keyFromNeighborsOld(bool, bool, bool, bool, bool, bool, bool, bool);
+    gd::string logTemplateStatus(bool) = win 0x2ad2f0, m1 0x390450, imac 0x4148f0;
+    static cocos2d::CCPoint offsetForDir(GJSmartDirection, int) = win 0x2abe90;
+    static cocos2d::CCPoint offsetForObject(SmartGameObject*);
+    static cocos2d::CCPoint offsetForType(SmartBlockType) = win 0x2abf90;
+    void removePrefab(gd::string, int);
+    void resetScannedPrefabs();
+    static SmartBlockType rotateBlockType(SmartBlockType, int) = win 0x2ac840;
+    static SmartBlockType rotateBlockType90(SmartBlockType);
+    static gd::string rotateKey(gd::string, int) = win 0x2acc60;
+    void savePrefab(gd::string, gd::string);
+    void saveRemap(gd::string) = win 0x2a9460;
+    void saveRemapToDict(gd::string, gd::string, cocos2d::CCDictionary*) = win 0x2a9830, imac 0x410e20;
+    SmartPrefabResult scanForPrefab(gd::string) = win 0x2aa480;
+    static bool shouldDiscardObject(SmartBlockType, GJSmartDirection);
+    static SmartBlockType smartObjectToType(SmartGameObject*, cocos2d::CCPoint) = win 0x2ac1c0;
+    static int smartTypeToObjectKey(SmartBlockType);
+
+    cocos2d::CCDictionary* m_prefabArrays;
+    cocos2d::CCDictionary* m_remapDict1;
+    cocos2d::CCDictionary* m_remapDict2;
+    cocos2d::CCDictionary* m_remapDict3;
+    cocos2d::CCDictionary* m_remapDict4;
+    cocos2d::CCDictionary* m_remapDict5;
+    cocos2d::CCDictionary* m_remapDict6;
+    gd::map<gd::string, SmartPrefabResult> m_prefabResults;
+    bool m_allowFlipX;
+    bool m_allowFlipY;
+    bool m_allowRotation;
+    bool m_ignoreCorners;
+    gd::string m_templateName;
+    gd::string m_unk0a8;
+    int m_nameIndex;
+    int m_prefabIndex;
 }
 
 [[link(android)]]
@@ -11282,7 +11447,7 @@ class GJUserCell : TableViewCell, FLAlertLayerProtocol, UploadPopupDelegate, Upl
     virtual void uploadActionFailed(int, int) = win 0xbb3e0, m1 0x1f3ea8, imac 0x2450a0, ios 0x114a74;
     virtual void onClosePopup(UploadActionPopup*) = win 0xbb4b0, imac 0x245210, m1 0x1f4010, ios 0x114b0c;
 
-    void loadFromScore(GJUserScore*) = win 0xb9f70, imac 0x239a60;
+    void loadFromScore(GJUserScore*) = win 0xb9f70, imac 0x239a60, m1 0x1e9a54;
     void onCancelFriendRequest(cocos2d::CCObject* sender);
     void onRemoveFriend(cocos2d::CCObject* sender) = m1 0x1f3644, imac 0x2447c0;
     void onSendMessage(cocos2d::CCObject* sender);
@@ -11556,13 +11721,29 @@ class GraphicsReloadLayer : cocos2d::CCLayer {
 [[link(android)]]
 class GravityEffectSprite : cocos2d::CCSprite {
     // virtual ~GravityEffectSprite();
+    GravityEffectSprite() {}
 
-    static GravityEffectSprite* create();
+    static GravityEffectSprite* create() = win inline, m1 0x9d8c0, imac 0xacad0, ios 0x119108 {
+        auto ret = new GravityEffectSprite();
+        if (ret->init()) {
+            ret->autorelease();
+            return ret;
+        }
+        delete ret;
+        return nullptr;
+    }
 
-    virtual bool init() = imac 0xbfa30, m1 0xae348, ios 0x126114;
-    virtual void draw() = m1 0xae56c, imac 0xbfc90, ios 0x126338;
+    virtual bool init() = win 0x3a4390, imac 0xbfa30, m1 0xae348, ios 0x126114;
+    virtual void draw() = m1 0xae56c, imac 0xbfc90, ios 0x126338 {}
 
-    TodoReturn updateSpritesColor(cocos2d::ccColor3B);
+    void updateSpritesColor(cocos2d::ccColor3B color) = win inline, m1 0xa97a4, imac 0xba240, ios 0x121f34 {
+        if (auto gravityBatchNode = this->getChildByTag(1)) {
+            auto children = gravityBatchNode->getChildren();
+            for (int i = 0; i < children->count(); i++) {
+                static_cast<cocos2d::CCSprite*>(children->objectAtIndex(i))->setColor(color);
+            }
+        }
+    }
 }
 
 [[link(android), depends(KeyframeObject)]]
@@ -11960,8 +12141,8 @@ class LabelGameObject : EffectGameObject {
     TodoReturn queueUpdateLabel(gd::string);
     TodoReturn removeLabel();
     TodoReturn unlockLabelColor();
-    TodoReturn updateLabel(float) = win 0x49af00;
-    TodoReturn updateLabel(gd::string) = imac 0x1b04c0;
+    void updateLabel(float);
+    void updateLabel(gd::string) = win 0x49af00, imac 0x1b04c0;
     TodoReturn updateLabelAlign(int);
     TodoReturn updateLabelIfDirty();
     TodoReturn updatePreviewLabel() = win 0x49ad40;
@@ -12416,7 +12597,7 @@ class LevelEditorLayer : GJBaseGameLayer, LevelSettingsDelegate {
     TodoReturn removeAllObjects();
     TodoReturn removeAllObjectsOfType(int) = win 0x2cdbb0;
     TodoReturn removeObject(GameObject*, bool) = imac 0xe27e0, m1 0xc98e4;
-    TodoReturn removePlayerCollisionBlock() = m1 0x62950c;
+    TodoReturn removePlayerCollisionBlock();
     void removeSpecial(GameObject*) = win 0x2cfbb0, imac 0xe28a0, m1 0xc99a4;
     TodoReturn resetDelayedSpawnNodes();
     TodoReturn resetEffectTriggerOptim(GameObject*, cocos2d::CCArray*);
@@ -14905,13 +15086,13 @@ class PlayerObject : GameObject, AnimatedSpriteDelegate {
     void incrementJumps() = win 0x376e10, imac 0x3f1bf0, m1 0x3728d8;
     bool init(int, int, GJBaseGameLayer*, cocos2d::CCLayer*, bool) = win 0x370a00, imac 0x3e8970, m1 0x36a954;
     bool isBoostValid(float);
-    bool isFlying() = win inline, imac 0x3efb00 {
+    bool isFlying() = win inline, m1 0x37097c, imac 0x3efb00 {
         return m_isShip || m_isBird || m_isDart || m_isSwing;
     }
-    bool isInBasicMode() = win inline, imac 0x3fcbc0 {
+    bool isInBasicMode() = win inline, m1 0x37b8c8, imac 0x3fcbc0 {
         return !this->isFlying() && !m_isBall && !m_isSpider;
     }
-    bool isInNormalMode() = win inline, imac 0x3ee1c0 {
+    bool isInNormalMode() = win inline, m1 0x36f5a8, imac 0x3ee1c0 {
         return !this->isFlying() && !m_isBall && !m_isRobot && !m_isSpider;
     }
     bool isSafeFlip(float);
@@ -14974,12 +15155,12 @@ class PlayerObject : GameObject, AnimatedSpriteDelegate {
         this->updatePlayerArt();
     }
     TodoReturn rotatePreSlopeObjects();
-    void runBallRotation(float) = win 0x377490;
+    void runBallRotation(float) = win 0x3775c0;
     void runBallRotation2() = win 0x3776f0;
     void runNormalRotation() {
         this->runNormalRotation(false, 1.0f);
     }
-    void runNormalRotation(bool, float) = win 0x9999999, imac 0x3ee220, m1 0x36f618;
+    void runNormalRotation(bool, float) = win 0x377490, imac 0x3ee220, m1 0x36f618;
     void runRotateAction(bool, int) = win 0x3775c0, m1 0x371934;
     TodoReturn saveToCheckpoint(PlayerCheckpoint*) = imac 0x40a6b0;
     void setSecondColor(cocos2d::ccColor3B const&) = win 0x387610, imac 0x3ec3a0, m1 0x36dd8c;
@@ -15028,7 +15209,7 @@ class PlayerObject : GameObject, AnimatedSpriteDelegate {
     void toggleRollMode(bool, bool) = win 0x3857e0, imac 0x406e60, m1 0x384a4c;
     void toggleSpiderMode(bool, bool) = win 0x385ce0, imac 0x4076c0, m1 0x38525c;
     void toggleSwingMode(bool, bool) = win 0x384d90, imac 0x405d60, m1 0x383a5c;
-    void toggleVisibility(bool) = win 0x3756d0, imac 0x3f1460;
+    void toggleVisibility(bool) = win 0x3756d0, imac 0x3f1460, m1 0x37219c;
     TodoReturn touchedObject(GameObject*) = imac 0x40ad70;
     void tryPlaceCheckpoint() = m1 0x371f50;
     TodoReturn unrotateGameplayObject(GameObject*) = win 0x37b8b0;
@@ -16140,7 +16321,7 @@ class SecretLayer2 : cocos2d::CCLayer, TextInputDelegate, FLAlertLayerProtocol, 
     // virtual ~SecretLayer2();
 
     static SecretLayer2* create() = imac 0x489fc0;
-    static cocos2d::CCScene* scene() = win 0x3cadf0, imac 0x489f80;
+    static cocos2d::CCScene* scene() = win 0x3cadf0, imac 0x489f80, m1 0x3f7288;
 
     virtual bool init() = win 0x3caf70, imac 0x48a0f0, m1 0x3f73b4, ios 0x309960;
     virtual void onExit() = imac 0x4900c0, m1 0x3fce88, ios 0x30dc8c;
@@ -18152,27 +18333,38 @@ class SetupShakePopup : SetupTriggerPopup {
 class SetupSmartBlockLayer : FLAlertLayer, TextInputDelegate, SelectArtDelegate {
     // virtual ~SetupSmartBlockLayer();
 
-    static SetupSmartBlockLayer* create(SmartGameObject*, cocos2d::CCArray*);
+    static SetupSmartBlockLayer* create(SmartGameObject*, cocos2d::CCArray*) = win 0x43e530;
 
     virtual void keyBackClicked() = win 0x4406d0, imac 0x4d46d0, m1 0x4383cc, ios 0x74300;
-    virtual void show() = m1 0x438368, imac 0x4d4640, ios 0x7429c;
+    virtual void show() = win 0x8ba30, m1 0x438368, imac 0x4d4640, ios 0x7429c;
     virtual void selectArtClosed(SelectArtLayer*) = win 0x440690, imac 0x4d46a0, m1 0x4383b4, ios 0x742e8;
 
-    TodoReturn determineStartValues();
-    bool init(SmartGameObject*, cocos2d::CCArray*) = m1 0x436e18, imac 0x4d2e00;
-    void onAllowFlipping(cocos2d::CCObject* sender);
-    void onAllowRotation(cocos2d::CCObject* sender);
-    void onClose(cocos2d::CCObject* sender);
-    void onCreate(cocos2d::CCObject* sender);
-    void onCreateAll(cocos2d::CCObject* sender);
-    void onCreateTemplate(cocos2d::CCObject* sender);
-    void onDontDelete(cocos2d::CCObject* sender);
-    void onIgnoreCorners(cocos2d::CCObject* sender);
-    void onNearbyReference(cocos2d::CCObject* sender);
-    void onPasteTemplate(cocos2d::CCObject* sender) = m1 0x437d78, imac 0x4d3f90;
-    void onReferenceOnly(cocos2d::CCObject* sender);
-    void onSelectPremade(cocos2d::CCObject* sender);
-    void onSelectTemplate(cocos2d::CCObject* sender);
+    void determineStartValues();
+    bool init(SmartGameObject*, cocos2d::CCArray*) = win 0x43e670, m1 0x436e18, imac 0x4d2e00;
+    void onAllowFlipping(cocos2d::CCObject* sender) = win 0x43f750;
+    void onAllowRotation(cocos2d::CCObject* sender) = win 0x43f6d0;
+    void onClose(cocos2d::CCObject* sender) = win 0x440030;
+    void onCreate(cocos2d::CCObject* sender) = win 0x4400f0;
+    void onCreateAll(cocos2d::CCObject* sender) = win 0x43fd80;
+    void onCreateTemplate(cocos2d::CCObject* sender) = win 0x440520;
+    void onDontDelete(cocos2d::CCObject* sender) = win 0x43f890;
+    void onIgnoreCorners(cocos2d::CCObject* sender) = win 0x43f900;
+    void onNearbyReference(cocos2d::CCObject* sender) = win 0x43f820;
+    void onPasteTemplate(cocos2d::CCObject* sender) = win 0x43f980, m1 0x437d78, imac 0x4d3f90;
+    void onReferenceOnly(cocos2d::CCObject* sender) = win 0x43f640;
+    void onSelectPremade(cocos2d::CCObject* sender) = win 0x440620;
+    void onSelectTemplate(cocos2d::CCObject* sender) = win 0x4406a0;
+
+    bool m_referenceOnly;
+    bool m_allowRotation;
+    bool m_allowFlipX;
+    bool m_allowFlipY;
+    bool m_useNearby;
+    bool m_dontDelete;
+    bool m_ignoreCorners;
+    int m_specialTemplate;
+    SmartGameObject* m_gameObject;
+    cocos2d::CCArray* m_gameObjects;
 }
 
 [[link(android)]]
@@ -18185,12 +18377,16 @@ class SetupSmartTemplateLayer : FLAlertLayer, TextInputDelegate, FLAlertLayerPro
     virtual void FLAlert_Clicked(FLAlertLayer*, bool) = win 0x4413a0, imac 0x4d5870, m1 0x439378, ios 0x74f38;
     virtual void textInputOpened(CCTextInputNode*) = win 0x4416e0, imac 0x4d5a90, m1 0x4395c8, ios 0x750bc;
     virtual void textInputClosed(CCTextInputNode*) = win 0x441480, imac 0x4d5950, m1 0x43945c, ios 0x74f9c;
-    virtual void textChanged(CCTextInputNode*) = m1 0x4396b4, imac 0x4d5b50, ios 0x75208;
+    virtual void textChanged(CCTextInputNode*) = win 0xc3110, m1 0x4396b4, imac 0x4d5b50, ios 0x75208;
 
     bool init(GJSmartTemplate*) = win 0x4407f0, imac 0x4d4c10, m1 0x43875c;
-    void onBack(cocos2d::CCObject* sender) = imac 0x4d5500;
-    void onClick(cocos2d::CCObject* sender) = m1 0x439068, imac 0x4d5530;
-    void onClose(cocos2d::CCObject* sender) = m1 0x4392a4, imac 0x4d57a0;
+    void onBack(cocos2d::CCObject* sender) = win 0x441840, imac 0x4d5500;
+    void onClick(cocos2d::CCObject* sender) = win 0x4411e0, m1 0x439068, imac 0x4d5530;
+    void onClose(cocos2d::CCObject* sender) = win 0x441870, m1 0x4392a4, imac 0x4d57a0;
+
+    GJSmartTemplate* m_smartTemplate;
+    CCTextInputNode* m_nameInput;
+    cocos2d::CCNode* m_unk298;
 }
 
 [[link(android)]]
@@ -19438,17 +19634,37 @@ class SliderTouchLogic : cocos2d::CCMenu {
 [[link(android)]]
 class SmartGameObject : GameObject {
     // virtual ~SmartGameObject();
+    SmartGameObject() {
+        m_referenceOnly = false;
+        m_baseFrame = "";
+        m_smartFrame = "";
+    }
 
-    static SmartGameObject* create(char const*);
+    static SmartGameObject* create(char const* frame) = win inline {
+        auto ret = new SmartGameObject();
+        if (ret->init(frame)) {
+            ret->autorelease();
+            return ret;
+        }
+        delete ret;
+        return nullptr;
+    }
 
-    virtual void customObjectSetup(gd::vector<gd::string>&, gd::vector<void*>&) = imac 0x1a0680, m1 0x1631f0, ios 0x379920;
-    virtual gd::string getSaveString(GJBaseGameLayer*) = m1 0x162cf4, imac 0x1a00c0, ios 0x37978c;
+    virtual void customObjectSetup(gd::vector<gd::string>&, gd::vector<void*>&) = win 0x4873d0, imac 0x1a0680, m1 0x1631f0, ios 0x379920;
+    virtual gd::string getSaveString(GJBaseGameLayer*) = win 0x487260, m1 0x162cf4, imac 0x1a00c0, ios 0x37978c;
 
-    bool init(char const*);
-    TodoReturn updateSmartFrame();
+    bool init(char const* frame) = win inline {
+        if (!GameObject::init(frame)) return false;
+        m_baseFrame = frame;
+        m_unk4D0 = 5;
+        m_bUnkBool2 = false;
+        return true;
+    }
+    void updateSmartFrame() = win 0x487070;
 
-    bool m_property157;
-    PAD = android32 0x5;
+    bool m_referenceOnly;
+    gd::string m_baseFrame;
+    gd::string m_smartFrame;
 }
 
 [[link(android)]]
@@ -19456,12 +19672,14 @@ class SmartTemplateCell : TableViewCell {
     // virtual ~SmartTemplateCell();
     SmartTemplateCell(char const*, float, float);
 
-    virtual bool init() = m1 0x1f57a0, imac 0x246ed0, ios 0x1158f0;
-    virtual void draw() = imac 0x246fa0, m1 0x1f585c, ios 0x1159a0;
+    virtual bool init() = win 0x3c7f0, m1 0x1f57a0, imac 0x246ed0, ios 0x1158f0;
+    virtual void draw() = win 0xad7f0, imac 0x246fa0, m1 0x1f585c, ios 0x1159a0;
 
     void loadFromObject(GJSmartTemplate*) = win 0xbd8c0, imac 0x23b400;
-    void onClick(cocos2d::CCObject* sender);
+    void onClick(cocos2d::CCObject* sender) = win 0xbdda0;
     void updateBGColor(int) = win 0xbdcb0;
+
+    GJSmartTemplate* m_smartTemplate;
 }
 
 [[link(android)]]
@@ -19874,7 +20092,7 @@ class StatsCell : TableViewCell {
     virtual void draw() = win 0xad710, imac 0x241930, m1 0x1f1224, ios 0x112c98;
 
     TodoReturn getTitleFromKey(char const*) = m1 0x1f05e0, imac 0x240e50;
-    void loadFromObject(StatsObject*) = win 0xb2630, imac 0x235030;
+    void loadFromObject(StatsObject*) = win 0xb2630, imac 0x235030, m1 0x1e50c0;
     void updateBGColor(int);
 }
 
