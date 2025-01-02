@@ -6689,7 +6689,7 @@ class GameObject : CCSpritePlus {
     bool getGroupDisabled();
     int getGroupID(int) = m1 0x4e0b24;
     gd::string getGroupString();
-    cocos2d::CCPoint const& getLastPosition() = imac 0x5b2a90;
+    cocos2d::CCPoint const& getLastPosition() = imac 0x5b2a90, m1 0x4eb730;
     GJSpriteColor* getMainColor();
     int getMainColorMode();
     int getObjectDirection();
@@ -7825,7 +7825,7 @@ class GJBaseGameLayer : cocos2d::CCLayer, TriggerEffectDelegate {
     virtual bool init() = win 0x201cc0, imac 0xfe730, m1 0xe0fb8, ios 0x1db7ec;
     virtual void visit() = win 0x240950, imac 0x152a70, m1 0x126ac4, ios 0x20a398;
     virtual void postUpdate(float) = m1 0x8fb0, imac 0x7150, ios 0xd590;
-    virtual TodoReturn checkForEnd() = m1 0x8fb0, imac 0x7150, ios 0xd590;
+    virtual void checkForEnd() = m1 0x8fb0, imac 0x7150, ios 0xd590;
     virtual TodoReturn testTime() = m1 0x8fb0, imac 0x7150, ios 0xd590;
     virtual void updateVerifyDamage() = m1 0x8fb0, imac 0x7150, ios 0xd590;
     virtual void updateAttemptTime(float) = m1 0x8fb0, imac 0x7150, ios 0xd590;
@@ -7860,7 +7860,7 @@ class GJBaseGameLayer : cocos2d::CCLayer, TriggerEffectDelegate {
     virtual TodoReturn didRotateGameplay() = m1 0x8fb0, imac 0x7150, ios 0xd590;
     virtual void updateTimeWarp(float) = win 0x230a00, imac 0x13f940, m1 0x11730c, ios 0x1ff468;
     virtual void updateTimeWarp(GameObject*, float) = win 0x2309f0, m1 0x117300, imac 0x13f920, ios 0x1ff45c;
-    virtual TodoReturn applyTimeWarp(float) = win 0x230a50, imac 0x13f990, m1 0x11734c, ios 0x1ff4a4;
+    virtual bool applyTimeWarp(float) = win 0x230a50, imac 0x13f990, m1 0x11734c, ios 0x1ff4a4;
     virtual void playGravityEffect(bool) = m1 0x8fb0, imac 0x7150, ios 0xd590;
     virtual TodoReturn manualUpdateObjectColors(GameObject*) = m1 0x8fb0, imac 0x7150, ios 0xd590;
     virtual TodoReturn createCustomParticle(gd::string const&, cocos2d::ParticleStruct const&, int, bool) = win 0x23a7f0, imac 0x14cf30, m1 0x122170, ios 0x206ed8;
@@ -7929,7 +7929,7 @@ class GJBaseGameLayer : cocos2d::CCLayer, TriggerEffectDelegate {
     void checkCollisionBlocks(EffectGameObject*, gd::vector<EffectGameObject*>*, int) = win 0x2139e0;
     int checkCollisions(PlayerObject*, float, bool) = win 0x20e330, imac 0x114fe0, m1 0xf45f0;
     void checkRepellPlayer() = win 0x233de0, imac 0x143830;
-    void checkSpawnObjects() = win 0x215410, imac 0x11c1f0;
+    void checkSpawnObjects() = win 0x215410, imac 0x11c1f0, m1 0xfaa7c;
     TodoReturn claimMoveAction(int, bool);
     TodoReturn claimParticle(gd::string, int);
     TodoReturn claimRotationAction(int, int, float&, float&, bool, bool);
@@ -8284,7 +8284,7 @@ class GJBaseGameLayer : cocos2d::CCLayer, TriggerEffectDelegate {
     }
     void updateCameraOffsetX(float, float, int, float, int, int) = win 0x230810, imac 0x13f3e0;
     void updateCameraOffsetY(float, float, int, float, int, int) = win 0x2308b0, imac 0x13f4e0;
-    void updateCollisionBlocks() = imac 0x11a8b0;
+    void updateCollisionBlocks() = imac 0x11a8b0, m1 0xf9468;
     void updateCounters(int, int) = win 0x22e760, m1 0x114398, imac 0x13bd80;
     void updateDualGround(PlayerObject*, int, bool, float) = win 0x20dcc0, imac 0x113e30, m1 0xf365c;
     void updateEnterEffects(float) = imac 0x10e8e0, m1 0xedfd4;
@@ -8292,7 +8292,7 @@ class GJBaseGameLayer : cocos2d::CCLayer, TriggerEffectDelegate {
     TodoReturn updateExtraGameLayers() = imac 0x12c410;
     TodoReturn updateGameplayOffsetX(int, bool);
     TodoReturn updateGameplayOffsetY(int, bool);
-    TodoReturn updateGradientLayers() = win 0x21a830, imac 0x129310;
+    void updateGradientLayers() = win 0x21a830, imac 0x129310, m1 0x104930;
     TodoReturn updateGroundShadows();
     TodoReturn updateGuideArt() = win 0x240130;
     TodoReturn updateInternalCamOffsetX(float, float, float);
@@ -9022,9 +9022,9 @@ class GJEffectManager : cocos2d::CCNode {
     TodoReturn playerButton(bool, bool) = win 0x25ae00;
     void playerDied();
     TodoReturn postCollisionCheck() = win 0x254f50, imac 0x2cc390;
-    TodoReturn postMoveActions() = win 0x259470, imac 0x2d4110;
-    TodoReturn preCollisionCheck() = imac 0x2cc370;
-    TodoReturn prepareMoveActions(float, bool) = win 0x258060, imac 0x2d16c0;
+    void postMoveActions() = win 0x259470, imac 0x2d4110, m1 0x275628;
+    void preCollisionCheck() = imac 0x2cc370, m1 0x26f028;
+    void prepareMoveActions(float, bool) = win 0x258060, imac 0x2d16c0, m1 0x27353c;
     TodoReturn processColors() = win 0x253fb0, imac 0x2ca520;
     TodoReturn processCopyColorPulseActions() = imac 0x2cabf0;
     TodoReturn processInheritedColors() = imac 0x2ca840;
@@ -9077,9 +9077,9 @@ class GJEffectManager : cocos2d::CCNode {
     void updateOpacityAction(OpacityEffectAction*);
     void updateOpacityEffects(float);
     void updatePulseEffects(float) = win 0x259e30, imac 0x2cb9a0, m1 0x26e850;
-    TodoReturn updateSpawnTriggers(float) = win 0x25aa10;
+    void updateSpawnTriggers(float) = win 0x25aa10, m1 0x276a7c;
     TodoReturn updateTimer(int, double);
-    TodoReturn updateTimers(float, float) = win 0x25b9e0, imac 0x2d82a0;
+    void updateTimers(float, float) = win 0x25b9e0, imac 0x2d82a0, m1 0x2789fc;
     TodoReturn wasFollowing(int, int);
     TodoReturn wouldCreateLoop(InheritanceNode*, int);
 
@@ -14958,12 +14958,12 @@ class PlayerObject : GameObject, AnimatedSpriteDelegate {
     void removePendingCheckpoint() = win 0x38c400, imac 0x4013f0;
     TodoReturn removePlacedCheckpoint() = imac 0x402230;
     TodoReturn resetAllParticles() = imac 0x3f1660;
-    TodoReturn resetCollisionLog(bool) = imac 0x3f2900;
+    void resetCollisionLog(bool) = imac 0x3f2900, m1 0x373520;
     TodoReturn resetCollisionValues();
     void resetPlayerIcon() = win 0x385550, imac 0x405460, m1 0x383208;
     TodoReturn resetStateVariables();
     void resetStreak() = win 0x375870, imac 0x3f16d0;
-    void resetTouchedRings(bool) = win 0x3824b0, imac 0x4010d0;
+    void resetTouchedRings(bool) = win 0x3824b0, imac 0x4010d0, m1 0x37f644;
     TodoReturn reverseMod();
     void reversePlayer(EffectGameObject*) = win 0x382600, imac 0x4041e0, m1 0x382044;
     void ringJump(RingObject*, bool) = win 0x382dd0, imac 0x402c50, m1 0x380dec;
@@ -15042,11 +15042,11 @@ class PlayerObject : GameObject, AnimatedSpriteDelegate {
     void updateCollideTop(float, GameObject*);
     void updateDashAnimation() = m1 0x370a18, imac 0x3efb90;
     void updateDashArt() = win 0x380390;
-    void updateEffects(float param) = win inline, imac 0x3f0ff0 {
+    void updateEffects(float param) = win inline, imac 0x3f0ff0, m1 0x371df0 {
         m_waveTrail->updateStroke(param);
     }
     void updateGlowColor() = win 0x3876a0, imac 0x4088a0, m1 0x386264;
-    TodoReturn updateInternalActions(float) = win 0x38d0c0, imac 0x40b720;
+    void updateInternalActions(float) = win 0x38d0c0, imac 0x40b720, m1 0x388d0c;
     void updateJump(float) = win 0x375b90, imac 0x3ec410, m1 0x36ddf4;
     TodoReturn updateJumpVariables();
     TodoReturn updateLastGroundObject(GameObject*);
@@ -15083,7 +15083,7 @@ class PlayerObject : GameObject, AnimatedSpriteDelegate {
     void updateShipSpriteExtra(gd::string);
     TodoReturn updateSlopeRotation(float);
     TodoReturn updateSlopeYVelocity(float);
-    void updateSpecial(float) = imac 0x3f0f70;
+    void updateSpecial(float) = imac 0x3f0f70, m1 0x371d78;
     TodoReturn updateStateVariables();
     TodoReturn updateStaticForce(float, float, bool);
     void updateStreakBlend(bool) = imac 0x3eb160;
@@ -15403,7 +15403,7 @@ class PlayLayer : GJBaseGameLayer, CCCircleWaveDelegate, CurrencyRewardDelegate,
     virtual void onEnterTransitionDidFinish() = win 0x3a4190, imac 0xbf710, m1 0xae0cc, ios 0x125f5c;
     virtual void onExit() = win 0x3a41c0, m1 0xae110, imac 0xbf740, ios 0x125f90;
     virtual void postUpdate(float) = win 0x39da60, imac 0xbb760, m1 0xaaab0, ios 0x123060;
-    virtual TodoReturn checkForEnd() = win 0x39de30, imac 0xbba90, m1 0xaad98, ios 0x123338;
+    virtual void checkForEnd() = win 0x39de30, imac 0xbba90, m1 0xaad98, ios 0x123338;
     virtual TodoReturn testTime() = m1 0x8fb0, imac 0x7150, ios 0xd590;
     virtual void updateVerifyDamage() = win 0x39e000, imac 0xbbb80, m1 0xaae94, ios 0x123420;
     virtual void updateAttemptTime(float) = win 0x39e0f0, imac 0xbbc70, m1 0xaaf9c, ios 0x123510;

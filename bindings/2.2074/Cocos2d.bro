@@ -1740,6 +1740,13 @@ class cocos2d::CCDirector : cocos2d::CCObject, cocos2d::TypeInfo {
     virtual float getDeltaTime() = m1 0x3df684, imac 0x4706f0, ios 0x179000;
 }
 
+class cocos2d::CCDisplayLinkDirector : cocos2d::CCDirector {
+    virtual void mainLoop() = m1 0x3e0a60;
+    virtual void setAnimationInterval(double dValue);
+    virtual void startAnimation();
+    virtual void stopAnimation();
+}
+
 [[link(win, android)]]
 class cocos2d::CCNodeRGBA : cocos2d::CCNode, cocos2d::CCRGBAProtocol {
     static cocos2d::CCNodeRGBA* create() = ios inline {
@@ -2035,8 +2042,9 @@ class cocos2d::CCAnimation : cocos2d::CCObject {
 [[link(win, android)]]
 class cocos2d::CCApplication : cocos2d::CCApplicationProtocol {
     static cocos2d::CCApplication* sharedApplication() = imac 0x314fe0, m1 0x2ab200;
-    virtual int run();
+    virtual int run() = m1 0x2ab198;
     virtual void openURL(char const*) = imac 0x315dc0, m1 0x2aba20, ios 0x1af380;
+    virtual void setAnimationInterval(double interval) = m1 0x2ab1cc;
 }
 
 [[link(win, android)]]
