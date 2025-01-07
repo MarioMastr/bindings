@@ -5315,7 +5315,7 @@ class FMODAudioEngine : cocos2d::CCNode {
     }
     void setMusicTimeMS(unsigned int, bool, int) = win 0x5c190, imac 0x3d0290, m1 0x357488;
     void setup() = win 0x53bc0, m1 0x352b4c, imac 0x3ca220;
-    void setupAudioEngine() = win 0x540a0, imac 0x3ca670;
+    void setupAudioEngine() = win 0x540a0, imac 0x3ca670, m1 0x352f40;
     void start() = win 0x55280;
     TodoReturn startMusic(int, int, int, int, bool, int, bool, bool);
     void stop();
