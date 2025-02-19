@@ -498,7 +498,7 @@ class cocos2d::CCScene : cocos2d::CCNode {
     int getHighestChildZ() = imac 0x27efb0, m1 0x2289cc;
 
     // CCScene(cocos2d::CCScene const&);
-    // CCScene() = ios 0x2508a4;
+    CCScene() = ios 0x2508a4, m1 0x228780;
     ~CCScene() = imac 0x27ee70, m1 0x22887c;
 
     virtual bool init() = m1 0x228894, imac 0x27eea0, ios 0x2401c0;
@@ -1728,7 +1728,7 @@ class cocos2d::CCDirector : cocos2d::CCObject, cocos2d::TypeInfo {
     void setContentScaleFactor(float);
     void setDefaultValues() = imac 0x46f8f0, m1 0x3dea54;
     void setDelegate(cocos2d::CCDirectorDelegate*);
-    void setDeltaTime(float);
+    void setDeltaTime(float) = m1 0x3df600;
     void setDepthTest(bool) = imac 0x46fc40;
     void setDisplayStats(bool);
     void setDontCallWillSwitch(bool);
@@ -1737,7 +1737,7 @@ class cocos2d::CCDirector : cocos2d::CCObject, cocos2d::TypeInfo {
     void setNextScene() = imac 0x470340;
     void setNotificationNode(cocos2d::CCNode*) = m1 0x3e07d4, imac 0x471a70;
     void setOpenGLView(cocos2d::CCEGLView*);
-    void setProjection(cocos2d::ccDirectorProjection);
+    void setProjection(cocos2d::ccDirectorProjection) = m1 0x3ded3c;
     void setSceneReference(cocos2d::CCScene*);
     void setSmoothFix(bool);
     void setSmoothFixCheck(bool);
@@ -1802,7 +1802,7 @@ class cocos2d::CCDirector : cocos2d::CCObject, cocos2d::TypeInfo {
 }
 
 class cocos2d::CCDisplayLinkDirector : cocos2d::CCDirector {
-    virtual void mainLoop() = m1 0x3e0a60;
+    virtual void mainLoop() = m1 0x3e0a60, win 0xbc600;
     virtual void setAnimationInterval(double dValue);
     virtual void startAnimation();
     virtual void stopAnimation();
