@@ -8,3 +8,4 @@ __membercall.xml
 /.vs
 build_test.sh
 build_test_win.sh
+**/.cache
